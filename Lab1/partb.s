@@ -10,7 +10,7 @@ movem.l %d2-%d7/%a2-%a5,(%a7)
 
 /******************************************************************/
 /* General Information ********************************************/
-/* File Name: Lab1a.s *********************************************/
+/* File Name: Lab1b.s *********************************************/
 /* Names of Students: Arun Woosaree and Navras Kamal             **/
 /* Date: 1/29/2018                                               **/
 /* General Description:                                          **/
@@ -70,6 +70,6 @@ littleathruz:				/* inval is between "a" and "z"*/
 
 /* DO NOT MODIFY THIS --------------------------------------------*/
 movem.l (%a7),%d2-%d7/%a2-%a5 /*Restore data and address registers */
-lea      40(%a7),%a7 
+lea      40(%a7),%a7
 rts
 /*----------------------------------------------------------------*/

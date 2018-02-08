@@ -24,7 +24,7 @@ movea.l #0x2310000, %a2 	/* save output address to a2*/
 
 /* let a value in quotation marks be the ASCII value of the character enclosed by the quotation marks*/
 
-loop: 						/* the looping function*/
+loop: /* the looping function*/
  move.l (%a1), %d2 			/* move the value at address a1 to d2, call this 'inval' from henceforth*/
 
  cmp.l #0x0D, %d2			/* Check if the inval is the enter code*/
@@ -83,6 +83,6 @@ end:						/* end the custom part of the program*/
 
 /* DO NOT MODIFY THIS --------------------------------------------*/
 movem.l (%a7),%d2-%d7/%a2-%a5 /*Restore data and address registers */
-lea      40(%a7),%a7 
+lea      40(%a7),%a7
 rts
 /*----------------------------------------------------------------*/
