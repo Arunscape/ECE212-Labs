@@ -40,7 +40,7 @@ loop:                       /* the looping function               */
  cmp.l #0x5B, %d2           /* compare the inval to "["           */
  blt bigathruz              /* if it is less than the value of    */
                             /* "[" then it must be in the range   */
-							/* "A" through "Z"                    */
+                            /* "A" through "Z"                    */
                             /* thus go to the part of the code to */
                             /* handle these values                */
 
@@ -73,8 +73,8 @@ littleathruz:               /* inval is between "a" and "z"       */
                             /* restarting the loop                */
 
  /* if inval isn't a valid character then code will continue here */
-err:						
- move.l #0xFFFFFFFF, (%a2) 	/* throw the error code to the output */
+err:
+ move.l #0xFFFFFFFF, (%a2)  /* throw the error code to the output */
                             /* address location                   */
  bra endloop                /* go to the end of the loop before   */
                             /* restarting the loop                */
