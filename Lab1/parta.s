@@ -14,7 +14,7 @@ movem.l %d2-%d7/%a2-%a5,(%a7)
 /* Names of Students: Arun Woosaree and Navras Kamal             **/
 /* Date: 1/29/2018                                               **/
 /* General Description:                                          **/
-/*                                                               **/
+/* Converts ASCII letters 0-9, a-f, A-F to hex value 0x0-0xF     **/
 /******************************************************************/
 
 /*Write your program here******************************************/
