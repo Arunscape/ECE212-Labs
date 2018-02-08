@@ -44,28 +44,41 @@ loop:               /* the looping function                       */
                     /* thus go to the proper part of the code to  */
                     /* handle this value                          */
 
- cmp.l #0x41, %d2 			/* compare the inval to "A"*/
- blt err					/* if it is less than the "A" than it is invalid, throw an error*/
+ cmp.l #0x41, %d2   /* compare the inval to "A"                   */
+ blt err            /* if it is less than the "A" than it is      */
+                    /* invalid, throw an error                    */
 
- cmp.l #0x47, %d2 			/* compare the inval to "G"*/
- blt bigathruf				/* if it is less than the value of "G" then it must be in the range "A" through "F"*/
- 							/*	 thus go to the part of the code to handle these values*/
+ cmp.l #0x47, %d2   /* compare the inval to "G"                   */
+ blt bigathruf      /* if it is less than the value of "G" then   */
+                    /* it must be in the range "A" through "F"    */
+                    /* thus go to the part of the code to handle  */
+                    /* these values                               */
 
- cmp.l #0x61, %d2 			/* compare the inval to "a"*/
- blt err					/* if it is in this range it is invalid, thus throw an error*/
+ cmp.l #0x61, %d2   /* compare the inval to "a"                   */
+ blt err            /* if it is in this range it is invalid,      */
+                    /* thus throw an error                        */
 
- cmp.l #0x67, %d2 			/* compare the inval to "g"*/
- blt littleathruf			/* if it is less than "g" then it must be in the range "a" through "F"*/
- 							/*	 thus go to the part of the code to handle these values*/
+ cmp.l #0x67, %d2   /* compare the inval to "g"                   */
+ blt littleathruf   /* if it is less than "g" then it must be in  */
+                    /* the range "a" through "F"                  */
+                    /* thus go to the part of the code to handle  */
+                    /* these values                               */
 
-err:						/* if the inval is equal to or above "g" then the code will naturally continue here*/
- move.l #0xFFFFFFFF, (%a2) 	/* throw the error code to the output address location*/
- bra endloop				/* go to the end of the loop before restarting the loop*/
+/*    if inval is above "f" then the code will continue here      */
+err:
+ move.l #0xFFFFFFFF, (%a2)   /* throw the error code to the output*/
+                             /* address location                  */
+ bra endloop                 /* go to the end of the loop before  */
+                             /* restarting the loop               */
 
-zeronine:					/* inval is between "0" and "9"*/
- sub.l #0x30, %d2 			/* subtract the hex value of "0" from inval, which will leave a value from 0x0 to 0x9, for "0" to "9" respectively*/
- move.l %d2, (%a2) 			/* move this calculted hex value to the output address location*/
- bra endloop				/* go to the end of the loop before restarting the loop*/
+zeronine:           /* inval is between "0" and "9"               */
+ sub.l #0x30, %d2 	/* subtract the hex value of "0" from inval,  */
+                    /* which will leave a value from 0x0 to 0x9,  */
+                    /* for "0" to "9" respectively                */
+ move.l %d2, (%a2)  /* move this calculted hex value to the output*/
+                       address location                           */
+ bra endloop        /* go to the end of the loop before restarting*/
+                    /* the loop                                   */
 
 bigathruf:					/* inval is between "A" and "F"*/
  sub.l #0x41, %d2   			/* subtracts the hex value of "A" d2. This is the difference between d2 and the character and "A"*/
