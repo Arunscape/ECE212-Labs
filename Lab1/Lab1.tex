@@ -12,17 +12,17 @@
 \usepackage{geometry}
 \usepackage{array}
 \usepackage{lipsum}
-
-\newenvironment{changemargin}[2]{%
-\begin{list}{}{%
-\setlength{\topsep}{0pt}%
-\setlength{\leftmargin}{#1}%
-\setlength{\rightmargin}{#2}%
-\setlength{\listparindent}{\parindent}%
-\setlength{\itemindent}{\parindent}%
-\setlength{\parsep}{\parskip}%
-}%
-\item[]}{\end{list}}
+%
+% \newenvironment{changemargin}[2]{%
+% \begin{list}{}{%
+% \setlength{\topsep}{0pt}%
+% \setlength{\leftmargin}{#1}%
+% \setlength{\rightmargin}{#2}%
+% \setlength{\listparindent}{\parindent}%
+% \setlength{\itemindent}{\parindent}%
+% \setlength{\parsep}{\parskip}%
+% }%
+% \item[]}{\end{list}}
 
 % \usepackage{tabu}
 %actual document
@@ -117,9 +117,9 @@
 \section{Appendix}
   %\textwidth=600pt
   \subsection{Part A Assembler Code}
-    \begin{changemargin}{-2cm}{-2cm}
+    % \begin{changemargin}{-2cm}{-2cm}
     \lstinputlisting{parta.s}
-  \end{changemargin}
+  % \end{changemargin}
 \newpage
 
   \subsection{Part B Assembler Code}

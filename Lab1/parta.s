@@ -19,8 +19,8 @@ movem.l %d2-%d7/%a2-%a5,(%a7)
 
 /*Write your program here******************************************/
 
-movea.l #0x2300000, %a1 	/* save input address to a1*/
-movea.l #0x2310000, %a2 	/* save output address to a2*/
+movea.l #0x2300000, %a1               /* save input  address to a1*/
+movea.l #0x2310000, %a2               /* save output address to a2*/
 
 /* let a value in quotation marks be the ASCII value of the character
    enclosed by the quotation marks*/
@@ -65,6 +65,7 @@ loop:               /* the looping function                       */
                     /* these values                               */
 
 /*    if inval is above "f" then the code will continue here      */
+
 err:
  move.l #0xFFFFFFFF, (%a2)   /* throw the error code to the output*/
                              /* address location                  */
@@ -76,28 +77,42 @@ zeronine:           /* inval is between "0" and "9"               */
                     /* which will leave a value from 0x0 to 0x9,  */
                     /* for "0" to "9" respectively                */
  move.l %d2, (%a2)  /* move this calculted hex value to the output*/
-                       address location                           */
+                    /* address location                           */
  bra endloop        /* go to the end of the loop before restarting*/
                     /* the loop                                   */
 
-bigathruf:					/* inval is between "A" and "F"*/
- sub.l #0x41, %d2   			/* subtracts the hex value of "A" d2. This is the difference between d2 and the character and "A"*/
- add.l #0xA, %d2  			/* adds the value of "A" to d2, which will make it into the hex representation of the original ASCII value*/
- move.l %d2, (%a2)			/* move this value to the output address location*/
- bra endloop				/* go to the end of the loop before restarting the loop*/
+bigathruf:          /* inval is between "A" and "F"               */
+ sub.l #0x41, %d2   /* subtracts the hex value of "A" d2. This is */
+                    /* the difference between d2 and the character*/
+                    /* and "A"                                    */
 
-littleathruf:				/* inval is between "a" and "f"*/
- sub.l #0x61, %d2   			/* subtracts the hex value of "a" d2. This is the difference between d2 and the character and "a"*/
- add.l #0xA, %d2  			/* adds the value of "a" to d2, which will make it into the hex representation of the original ASCII value*/
- move.l %d2, (%a2)			/* move this value to the output address location*/
- bra endloop				/* go to the end of the loop before restarting the loop*/
+ add.l #0xA, %d2    /* adds the value of "A" to d2, which will    */
+                    /* make it into the hex representation of the */
+                    /* original ASCII value                       */
+ move.l %d2, (%a2)  /* move this value to the output address      */
+                    /* location                                   */
+ bra endloop        /* go to the end of the loop before restarting*/
+                    /* the loop                                   */
 
-endloop:					/* handles code to be executed before the start of a new loop*/
- add.l #0x4, %a1 			/* increment the input address by 4*/
- add.l #0x4, %a2 			/* increment the output address by 4*/
- bra loop					/* restart the loop*/
+littleathruf:       /* inval is between "a" and "f"               */
+ sub.l #0x61, %d2   /* subtracts the hex value of "a" d2.         */
+                    /* This is the difference between d2          */
+                    /* and the character and "a"                  */
+ add.l #0xA, %d2    /* adds the value of "a" to d2, which will    */
+                    /* make it into the hex representation of     */
+                    /* the original ASCII value                   */
+ move.l %d2, (%a2)  /* move this value to the output address      */
+                    /* location                                   */
+ bra endloop        /* go to the end of the loop before restarting*/
+                    /* the loop                                   */
 
-end:						/* end the custom part of the program*/
+endloop:            /* handles code to be executed before the     */
+                    /* start of a new loop                        */
+ add.l #0x4, %a1    /* increment the input address by 4           */
+ add.l #0x4, %a2    /* increment the output address by 4          */
+ bra loop           /* restart the loop                           */
+
+end:                /* end the custom part of the program         */
 
 /*End of program **************************************************/
 
