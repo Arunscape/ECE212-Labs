@@ -22,20 +22,27 @@ movem.l %d2-%d7/%a2-%a5,(%a7)
 movea.l #0x2300000, %a1 	/* save input address to a1*/
 movea.l #0x2310000, %a2 	/* save output address to a2*/
 
-/* let a value in quotation marks be the ASCII value of the character enclosed by the quotation marks*/
+/* let a value in quotation marks be the ASCII value of the character
+   enclosed by the quotation marks*/
 
-loop: /* the looping function*/
- move.l (%a1), %d2 			/* move the value at address a1 to d2, call this 'inval' from henceforth*/
+loop:               /* the looping function                       */
+ move.l (%a1), %d2  /* move the value at address a1 to d2,        */
+                    /* call this 'inval' from henceforth          */
 
- cmp.l #0x0D, %d2			/* Check if the inval is the enter code*/
- beq end					/* if it is, go to the end of the program (breaking the loop)*/
+ cmp.l #0x0D, %d2   /* Check if the inval is the enter code       */
+ beq end            /* if it is, go to the end of the program     */
+                    /* (breaking the loop)                        */
 
- cmp.l #0x2F, %d2			/* compare inval to the hex value of "0"*/
- blt err					/* if inval is less than ASCII zero it is not valid, throw an error*/
+ cmp.l #0x2F, %d2   /* compare inval to the hex value of "0"      */
+ blt err            /* if inval is less than ASCII zero           */
+                    /* it is not valid, throw an error            */
 
- cmp.l #0x3A, %d2 			/* compare the inval to the hex value of ":", which is one ASCII value higher than "9"*/
- blt zeronine				/* if it is less than the value of ":" then it must be a value between "0" and "9"*/
- 							/* 	   thus go to the proper part of the code to handle this value*/
+ cmp.l #0x3A, %d2   /* compare the inval to the hex value of ":", */
+                    /* which is one ASCII value higher than "9"   */
+ blt zeronine       /* if it is less than the value of ":"        */
+                    /* then it must be a value between "0" and "9"*/
+                    /* thus go to the proper part of the code to  */
+                    /* handle this value                          */
 
  cmp.l #0x41, %d2 			/* compare the inval to "A"*/
  blt err					/* if it is less than the "A" than it is invalid, throw an error*/

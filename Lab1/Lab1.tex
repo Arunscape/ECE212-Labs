@@ -5,13 +5,24 @@
 \usepackage{listings}
 \lstset{
 %language=Assembler
-breaklines=true,
+ % breaklines=true
 %frame=single,
 %xleftmargin=-1pt
 }
 \usepackage{geometry}
 \usepackage{array}
 \usepackage{lipsum}
+
+\newenvironment{changemargin}[2]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#2}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
 
 % \usepackage{tabu}
 %actual document
@@ -24,14 +35,16 @@ breaklines=true,
       \LARGE
       ECE 212 Lab - Introduction to Microprocessors
 
-Department of Electrical and Computer Engineering
+      Department of Electrical and Computer Engineering
 
-University of Alberta
-\vspace{2cm}
+      University of Alberta
 
-Lab 1: Introduction to Assembly Language.
-\vspace{5cm}
-\Large
+      \vspace{2cm}
+
+      Lab 1: Introduction to Assembly Language.
+
+      \vspace{5cm}
+      \Large
 
       \begin{tabular}{ | m{5cm} | m{5cm} | }
         \hline
@@ -61,61 +74,55 @@ Lab 1: Introduction to Assembly Language.
 %table of tableofcontents
 
 \tableofcontents
+% \vfill
 \newpage
 
 \section{Introduction}
-  %Intro
-  \lipsum[1-2]
-\section{Design}
+  \lipsum[1]
+  \lipsum[2]
 
+\section{Design}
   \subsection{Part A}
-    part a
     \lipsum[3]
   \subsection{Part B}
-    partb
     \lipsum[4]
-
 
 \section{Testing}
   \subsection{Part A}
-    part a
     \lipsum[5]
 
   \subsection{Part B}
-    partb
     \lipsum[6]
 
 \section{Questions}
 
     \subsection{Question 1}
-      ``What happens when there is no exit code ‘0x0D’ provided in the initialization process? Would it cause a problem? Why or why not?''
-      answer goes here
+      \textit{``What happens when there is no exit code ‘0x0D’ provided in the initialization process? Would it cause a problem? Why or why not?''}
       \\ \\
       \noindent\textbf{A:}
       \lipsum[7]
 
     \subsection{Question 2}
-      ``How can our code be modified to provide a variable address range? For example, what if I only wanted to convert the first 10 data entires? ''
-      answer goes here
+      \textit{``How can our code be modified to provide a variable address range? For example, what if I only wanted to convert the first 10 data entires? ''}
       \\ \\
       \noindent\textbf{A:}
       \lipsum[8]
 
 \section{Conclusion}
-  conclusions
-  \lipsum[9-10]
+  \lipsum[9]
+  \medskip
+  \lipsum[10]
 
 \newpage
 \section{Appendix}
   %\textwidth=600pt
   \subsection{Part A Assembler Code}
-
+    \begin{changemargin}{-2cm}{-2cm}
     \lstinputlisting{parta.s}
-
+  \end{changemargin}
 \newpage
 
   \subsection{Part B Assembler Code}
-
     \lstinputlisting{partb.s}
 
 \end{document}
