@@ -54,7 +54,7 @@ loop:                       /* the looping function               */
                             /* thus go to the part of the code to */
                             /* handle these values                */
 
-bigathruz:                 /* inval is between "A" and "Z"       */
+bigathruz:                  /* inval is between "A" and "Z"       */
  add.l #0x20, %d2           /* adds the hex difference between    */
                             /* "A" and "a", making it into the    */
                             /* lowercase equivalent               */

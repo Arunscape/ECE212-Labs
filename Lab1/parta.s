@@ -73,7 +73,7 @@ err:
                              /* restarting the loop               */
 
 zeronine:           /* inval is between "0" and "9"               */
- sub.l #0x30, %d2 	/* subtract the hex value of "0" from inval,  */
+ sub.l #0x30, %d2   /* subtract the hex value of "0" from inval,  */
                     /* which will leave a value from 0x0 to 0x9,  */
                     /* for "0" to "9" respectively                */
  move.l %d2, (%a2)  /* move this calculted hex value to the output*/
