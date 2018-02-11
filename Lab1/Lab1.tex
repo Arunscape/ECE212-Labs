@@ -83,6 +83,7 @@
 \newpage
 
 \section{Introduction}
+TODO
   This text is filler text from an ece 210 lab report
   The purpose of this experiment was to explore the process behind designing and implementing real life design problems using the Xilinx software. A multiplexer (MUX) and demultiplexer (DEMUX) circuit were designed with the goal of sending data to three different 'radio astronomers'. Xilinx was used to create schematics for the circuit, which was then programmed to the Xilinx FPGA development board. The second part of the experiment involved the design and implementation of a lab access control circuit, again using Xilinx and the development board.
 
@@ -219,18 +220,27 @@
       \\ \\
       \noindent\textbf{A:}
       % \lipsum[7]
-      It would cause an infinite loop, yo
+      Yes. This would cause a problem, because there would be no way to exit the program,
+      so the program would keep reading data and moving the converted values to
+      memory locations, until the program attempts to read or write to a memory
+      location that is restricted or non-existant. This would then cause the
+      program to crash.
 
     \subsection{Question 2}
       \textit{``How can our code be modified to provide a variable address range? For example, what if I only wanted to convert the first 10 data entires? ''}
       \\ \\
       \noindent\textbf{A:}
       % \lipsum[8]
-      You could, like, use a counter in d2, or maybe a stack idk
+      #TODO
+      You could, like, use a counter in some other data register like d3
+      and the main loop would go, and at the end, we can do a sub.l #1, \%d3,
+      then you do a cmp.l, and then if blt,
+      continue the loop, but if bge, then go to end label
 
 \section{Conclusion}
+TODO
   \lipsum[9]
-  \medskip
+  % \medskip
   \lipsum[10]
 
 \newpage
@@ -238,7 +248,7 @@
   %\textwidth=600pt
   \subsection{Part A Assembler Code}
     % \begin{changemargin}{-2cm}{-2cm}
-    \lstinputlisting{parta.s}
+    \lstinputlisting{code/parta.s}
   % \end{changemargin}
 \newpage
   \subsection{Part A Flowchart Diagram}
@@ -249,7 +259,7 @@
     \end{figure}
 \newpage
   \subsection{Part B Assembler Code}
-    \lstinputlisting{partb.s}
+    \lstinputlisting{code/partb.s}
 \newpage
   \subsection{Part B Flowchart Diagram}
     \begin{figure}[h!]
