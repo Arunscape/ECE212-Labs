@@ -136,7 +136,8 @@
     Similar steps were done to convert input characters in the other accepted ranges.
     After converting the input character and moving the output to the location pointed by a2,
     we branched to a label `endloop', which increments the addresses stored in a1 and a2 by 4,
-    and then branches to the loop, where the process is repeated.
+    and then branches to the loop, where the process is repeated. The flowchart diagram can
+    be found in the Appendix.
 
     % \begin{figure}
     %   \includegraphics{/path/to/figure}
@@ -166,7 +167,7 @@
     relative to the ASCII character `a', and added to the ASCII character `A'. The
     converted value is then stored at the memory location pointed to by a2, and
     the addresses stored in a1 and a2 are incremented by 4 before the loop
-    starts over.
+    starts over. The flowchart diagram can be found in the Appendix.
 
     % \begin{figure}
     %   \includegraphics{/path/to/figure}
@@ -187,7 +188,7 @@
     this program was moved into the project folder, downloaded to the ColdFire microcontroller,
     and the MTTTY serial monitor was loaded to monitor the expected output. Our code was
     further tested by replacing the `DataStorage.s' file with the other variants provided
-    named: `DataStorage1.s', `DataStorage2.s', and `DataStorage3.s'.
+    named: \textit{DataStorage1.s}, \textit{DataStorage2.s}, and \textit{DataStorage3.s}.
     Finally, our program, which produced the correct output, was verified by a lab TA.
 
     \begin{figure}[h!]
@@ -197,7 +198,13 @@
     \end{figure}
 
   \subsection{Part B}
-    A schematic for the control circuit was created using Xilinx ISE according to the design in the lab manual, and developed in the prelab. Like in part one, the synthesis and pin assignment steps were done, with inputs being wired to separate switches, and the outputs being wired to separate LEDs. A VHDL script was created, with the truth table in Table 3 coded in to test the outputs, and the design was tested using ISim (Figure 7). Finally, a programming file was generated, and the bitstream was uploaded to the development board FPGA using Adept.
+    The procedure for testing our code for part B was very similar to the process
+    described above in Part A. We visually inspected our code in the Eclipse IDE,
+    used the Eclipse debugger to step through our code, and monitor relevant
+    memory addresses and registers. When we were confident that we had a working
+    solution, we used the provided files \textit{Lab1Test.s}, and the \textit{DataStorage*.s}
+    files to verify our solution by downloading the program to the ColdFire microcontroller,
+    and monitoring the output in MTTTY. Finally, our solution was verified by a lab TA.
 
     \begin{figure}[h!]
       \centering
