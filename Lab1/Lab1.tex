@@ -89,19 +89,38 @@
 \section{Introduction}
 \textbf{TODO
   This text is filler text from an ece 210 lab report}
-  The purpose of this experiment was to explore the process behind designing and implementing real life design problems using the Xilinx software. A multiplexer (MUX) and demultiplexer (DEMUX) circuit were designed with the goal of sending data to three different 'radio astronomers'. Xilinx was used to create schematics for the circuit, which was then programmed to the Xilinx FPGA development board. The second part of the experiment involved the design and implementation of a lab access control circuit, again using Xilinx and the development board.
+  The purpose of this lab is to learn and test with the Assembly language in a hands on environment
+  in order to solidify the concepts learned in class and to improve our skill in the language.  In
+  addition we will be learning how to handle the Netburner ColdFire boards directly, manipulating
+  the contents of their memory and data structures.  Finally we are going to learn how to work inside
+  the Eclipse IDE environment and how to properly use the powerful tools that come alongside it.  
 
-  A multiplexer is a device that selects a single input from multiple signals, and only transmits one signal. It effectively receives multiple inputs, and only has a single output. The selection occurs based on the values of the 'selection signals'. For a 2x1 (two input signals) multiplexer, only one select signal is needed, but for a 4x1 multiplexer, two select signals are needed.
+  DESCRIBE THE BOARD A LITTLE BIT
 
-  Multiplexers are often coupled with demultiplexers. DEMUXs receive a single input, and then send this input on to different possible outputs or 'locations', based again on the select signals inputted. The combination of a multiplexer and a demultiplexer allow the transfer of multiple signals over a shared medium or transmission line, in a process known as multiplexing. The signals are combined at the transmitter by the MUX and then split up at the receiving end by the DEMUX.
+  DESCRIBE THE LANGUAGE A BIT
 
-  In the lab, the Xilinx software was utilized to design a three input/one output MUX, and a one input/three output DEMUX using only AND gates, OR gates, and inverters. Initially, Boolean expressions representing the MUX and DEMUX were simplified using a K-Map. From these simplified expressions, two separate designs were created using schematic capture tools, and then were utilized to implement data transmission to engineers. The output of the MUX was wired to the input of the DEMUX. The three outputs from the DEMUX are then sent to the office of radio astronomers. Three additional outputs are used, (designated as 'engineering indicators') to confirm the radio astronomers are receiving data. Only one of these engineering indicators should be turned on, considering the DEMUX selects only one output.
+  The lab will be split into two sections, each with a different goal but with similar implementation.
+  For one part we will be taking in an ASCII value and if the character it represents is a character
+  included in the symbols for hexadecimal numbers then that hexadecimal value is output, otherwise
+  it returns an error.  For the second part an ASCII value is taken in, and if the character it represents
+  is a letter in the English language (A-Z) then the ASCII code for the character in the opposite case 
+  is output.  Thus valid uppercase english letters are converted to their lowercase equivalents in ASCII 
+  and vice versa.  
 
-  In the second part of the experiment, a circuit was designed and then implemented to
-  control access to two labs: Lab0 and Lab1. Two input signals are accepted
-  (a 2-bit card code and a 3-bit key), with three output signals (Lab0\textunderscore unlock, Lab1\textunderscore unlock, and Alarm).
-   A valid card read and correct key entered unlocks the appropriate lab, and
-   invalid input signals will sound the alarm.
+  These experiments will introduce the general programming practices of loops, if - then - else statements, 
+  and the manipulation of stored data.  More specifically to Assembly this will introduce the movement of
+  memory and data to and from different parts of the Netburner chip, using techniques such as referencing
+  memory addresses and copying data to local data registers.  The debugger tools of the IDE will be used
+  to closely examine this movement and to analyze all changes to the data in order to solve issues in 
+  development as well as to test the code.  This is all building off the concepts explored in Lab 0. 
+  
+  They will also introduce the computing science practice of Pair Programming, wherein two people work on 
+  one computer to develop code in tandem.  The partners are divided into the Driver and the Navigator.
+  In this structure the Driver is the one responsible for the physical typing of the code into the computer,
+  and the Navigator reviews this code and clarifies the meaning of each passage in order to find bugs faster
+  and to improve efficiency in testing.  The two partners should communicate constantly and switch in order
+  to maximize the efficiency of this working model.  This will not only decrease time needed for development
+  but it will also improve the quality of code from each partner.  
 
 
 \section{Design}
