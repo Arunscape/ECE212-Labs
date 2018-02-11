@@ -95,9 +95,12 @@
   the contents of their memory and data structures.  Finally we are going to learn how to work inside
   the Eclipse IDE environment and how to properly use the powerful tools that come alongside it.  
 
-  DESCRIBE THE BOARD A LITTLE BIT
-
-  DESCRIBE THE LANGUAGE A BIT
+  The code will be developped for the Netburner ColdFire Platform, which has some parameters that should
+  be kept in mind throughout testing.  There is multiple Data and Address registers, and the memory can
+  is indexed by hexadecimal codes.  The data and the stored locations can each be modified directly, values
+  can be compared and the code can branch into different sections depending on the values of the CCR bits,
+  which store information about the outcome from the last comparison or valid operation, such as if a 
+  value is negative or zero.  These will be used to execute code conditionally.  
 
   The lab will be split into two sections, each with a different goal but with similar implementation.
   For one part we will be taking in an ASCII value and if the character it represents is a character
@@ -115,7 +118,7 @@
   development as well as to test the code.  This is all building off the concepts explored in Lab 0. 
   
   They will also introduce the computing science practice of Pair Programming, wherein two people work on 
-  one computer to develop code in tandem.  The partners are divided into the Driver and the Navigator.
+  one computer to develop and test code in tandem.  The partners are divided into the Driver and the Navigator.
   In this structure the Driver is the one responsible for the physical typing of the code into the computer,
   and the Navigator reviews this code and clarifies the meaning of each passage in order to find bugs faster
   and to improve efficiency in testing.  The two partners should communicate constantly and switch in order
