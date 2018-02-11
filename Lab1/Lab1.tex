@@ -289,11 +289,6 @@
       the number of desired iterations (this value would be hardcoded, this is just a general case), then
       jump to the \textbf{end} label, breaking the loop.  This way would be more memory efficient as it
       does not require an additonal data register and the modification of a counter value.  
-      \textbf{TODO}
-      You could, like, use a counter in some other data register like d3
-      and the main loop would go, and at the end, we can do a sub.l \#1, \%d3,
-      then you do a cmp.l, and then if blt,
-      continue the loop, but if bge, then go to end label
 
 \section{Conclusion}
   This lab demonstrated how to use the Assembly language to perform operations
