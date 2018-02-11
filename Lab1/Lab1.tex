@@ -112,17 +112,48 @@
     files, which were provided, were used to initialize memory contents.
 
     We started with a loop branch that served as our main looping function. This
-    loop first starts by moving a word from a memory location pointed to by a1, to
-    the data register d2 so that we could start comparing the input data to known ASCII values
+    loop first starts by moving data from a memory location pointed to by a1, to
+    the data register d2 so that we could start comparing the input data to known ASCII values.
     In the first comparison, the input character is compared to `0x0D', which is the ASCII
-    code for the 'Enter' key. This code is meant to signal the end of the program, so if
-    the input was the ASCII code for the 'Enter' key, then we branched to a label that
+    code for the `Enter' key. This code is meant to signal the end of the program, so if
+    the input was the ASCII code for `Enter', we branched to a label that
     would end our program. The next step was to determine if the input character was valid.
     For Part A, an input character was valid if it was an ASCII character from 0-9, A-F, or a-f.
     In other words, the data was accepted if it was in the following ranges: 0x30-0x39,
-    0x41-0x46, or 0x61-0x66.
-  \subsection{Part B}
+    0x41-0x46, or 0x61-0x66. If the input character was invalid, we brached to a label
+    named `err', which would put the error code `FFFFFFFF' in the memory location
+    pointed to by a2, which keeps track of where our output data goes.
 
+    If the input character was valid, we had three branches to take care of each
+    of the accepted ranges of input. For example, in the branch that took care of the
+    input range A-F, the ASCII value of `A' was subtracted from the input value, and
+    the difference was added to the hex value 0xA. The converted value is then moved
+    to the memory location pointed to by a2, which keeps track of where our output data goes.
+    Similar steps were done to convert input characters in the other accepted ranges.
+    After converting the input character and moving the output to the location pointed by a2,
+    we branched to a label `endloop', which increments the addresses stored in a1 and a2 by 4,
+    and then branches to the loop, where the process is repeated.
+
+  \subsection{Part B}
+    The design for Part B was very similar to Part A. The address register a1 still
+    initially points to 0x2300000, but this time, a2 now points to 0x2320000, which is
+    where the converted data is stored.The same data register d2 was used to temporarily
+    store the input and process the data. Just like in Part A, the \textit{Setzeros.s} and the \textit{DataSrorage.s} files
+    were used to initialize memory contents as well.
+
+    Once again, we had a loop branch that initially loads input data from the location
+    pointed to by a1 into data register d2, and the ASCII `Enter' code still terminates
+    the program, as before. In Part B, valid inputs are the ASCII characters A-Z and a-z.
+    (0x41-0x5A and 0x61-0x7A)
+    Error handling was also similar to Part A, where the value 0xFFFFFFFF was stored at the
+    memory location pointed to by a2. We had two branches to handle the two ranges of accepted
+    characters.
+
+    For example, if an input character was in the range a-z, a difference was taken
+    relative to the ASCII character `a', and added to the ASCII character `A'. The
+    converted value is then stored at the memory location pointed to by a2, and
+    the addresses stored in a1 and a2 are incremented by 4 before the loop
+    starts over.
 \section{Testing}
   \subsection{Part A}
     Designs for the MUX and DEMUX schematics were created in Xilinx ISE, as outlined in Figures 2 and 3 in Section III. From the designs created, two custom symbols for the MUX and DEMUX were made, as shown in Figure 4, which allows for the use of modular design, which has the advantage of allowing components to be re-used, or allowing changes made to the component to be automatically transferred throughout the design hierarchy. The custom symbols can be created by expanding the Design Utilities menu under the Processes window, and double clicking on Create Schematic Symbol. Next, the synthesis and pin assignment steps were done. Input signals were wired to separate switches on the development FPGA, and output signals were wired to separate LEDs on the board. The design was verified using ISim by first creating a VHDL script and coding the expected outputs, as determined by the circuit design and prelab. A picture of the DEMUX test can be found in Figure 6. Finally, a programming file was created and the bitstream was uploaded to the FPGA board using Adept.
