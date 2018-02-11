@@ -147,7 +147,19 @@ TODO
     % \end{figure}
 
     \subsubsection{Part A Sample Calculation of Conversion}
-      TODO
+
+        input = `9' = 0x39\\
+        0x39 - 0x30 = 0x9\\
+        \\
+        input = `E' = 0x45\\
+        0x45 - 0x41 = 0x4\\
+        0x4 + 0xA = 0xE\\
+        \\
+        input = `d' = 0x64\\
+        0x64 - 0x61 = 0x3\\
+        0x3 + 0xA = 0xD
+
+
 
   \subsection{Part B}
     The design for Part B was very similar to Part A. The address register a1 still
@@ -177,7 +189,15 @@ TODO
     % \end{figure}
 
     \subsubsection{Part B Sample Calculation of Conversion}
-      TODO
+
+    input = `M' = 0x4D\\
+    0x4D + 0x20 = 0x6D\\
+    0x6D = 'm'\\
+    \\
+    input = `d' = 0x64\\
+    0x64 - 0x20 = 0x44\\
+    0x44 = 'D'
+
 
 \section{Testing}
   \subsection{Part A}
@@ -231,9 +251,9 @@ TODO
       \\ \\
       \noindent\textbf{A:}
       % \lipsum[8]
-      #TODO
+      TODO
       You could, like, use a counter in some other data register like d3
-      and the main loop would go, and at the end, we can do a sub.l #1, \%d3,
+      and the main loop would go, and at the end, we can do a sub.l \#1, \%d3,
       then you do a cmp.l, and then if blt,
       continue the loop, but if bge, then go to end label
 
