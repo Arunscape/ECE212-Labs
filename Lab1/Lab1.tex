@@ -74,25 +74,61 @@
 %table of tableofcontents
 
 \tableofcontents
+
 % \vfill
 \newpage
 
 \section{Introduction}
-  \lipsum[1]
-  \lipsum[2]
+  This text is filler text from an ece 210 lab report
+  The purpose of this experiment was to explore the process behind designing and implementing real life design problems using the Xilinx software. A multiplexer (MUX) and demultiplexer (DEMUX) circuit were designed with the goal of sending data to three different 'radio astronomers'. Xilinx was used to create schematics for the circuit, which was then programmed to the Xilinx FPGA development board. The second part of the experiment involved the design and implementation of a lab access control circuit, again using Xilinx and the development board.
+
+  A multiplexer is a device that selects a single input from multiple signals, and only transmits one signal. It effectively receives multiple inputs, and only has a single output. The selection occurs based on the values of the 'selection signals'. For a 2x1 (two input signals) multiplexer, only one select signal is needed, but for a 4x1 multiplexer, two select signals are needed.
+
+  Multiplexers are often coupled with demultiplexers. DEMUXs receive a single input, and then send this input on to different possible outputs or 'locations', based again on the select signals inputted. The combination of a multiplexer and a demultiplexer allow the transfer of multiple signals over a shared medium or transmission line, in a process known as multiplexing. The signals are combined at the transmitter by the MUX and then split up at the receiving end by the DEMUX.
+
+  In the lab, the Xilinx software was utilized to design a three input/one output MUX, and a one input/three output DEMUX using only AND gates, OR gates, and inverters. Initially, Boolean expressions representing the MUX and DEMUX were simplified using a K-Map. From these simplified expressions, two separate designs were created using schematic capture tools, and then were utilized to implement data transmission to engineers. The output of the MUX was wired to the input of the DEMUX. The three outputs from the DEMUX are then sent to the office of radio astronomers. Three additional outputs are used, (designated as 'engineering indicators') to confirm the radio astronomers are receiving data. Only one of these engineering indicators should be turned on, considering the DEMUX selects only one output.
+
+  In the second part of the experiment, a circuit was designed and then implemented to
+  control access to two labs: Lab0 and Lab1. Two input signals are accepted
+  (a 2-bit card code and a 3-bit key), with three output signals (Lab0\textunderscore unlock, Lab1\textunderscore unlock, and Alarm).
+   A valid card read and correct key entered unlocks the appropriate lab, and
+   invalid input signals will sound the alarm.
+
 
 \section{Design}
   \subsection{Part A}
-    \lipsum[3]
+    For the first part of the lab, the address register a1 was chosen to initially point to
+    memory location 0x2300000, which is the starting point of where the input data was stored.
+    We used this address register to keep track of the memory location of the next long word
+    of data to be read as an input to our program. Even though one memory location is capable
+    of storing one ASCII character, in this lab, 4 memory locations were used to store one
+    ASCII character, as specified in the lab manual.
+    Next, a2 was selected to initially point at the memory location 0x231000, which is the
+    starting location of where our output for the converted values was. This register
+    was used to keep track of the memory location of where the next long word of
+    our converted data would go. The data register d2 was chosen to temporarily store
+    data so we could do comparisons and process the input data.
+    The \textit{Setzeros.s} and the \textit{DataSrorage.s}
+    files, which were provided, were used to initialize memory contents.
+
+    We started with a loop branch that served as our main looping function. This
+    loop first starts by moving a word from a memory location pointed to by a1, to
+    the data register d2 so that we could start comparing the input data to known ASCII values
+    In the first comparison, the input character is compared to `0x0D', which is the ASCII
+    code for the 'Enter' key. This code is meant to signal the end of the program, so if
+    the input was the ASCII code for the 'Enter' key, then we branched to a label that
+    would end our program. The next step was to determine if the input character was valid.
+    For Part A, an input character was valid if it was an ASCII character from 0-9, A-F, or a-f.
+    In other words, the data was accepted if it was in the following ranges: 0x30-0x39,
+    0x41-0x46, or 0x61-0x66.
   \subsection{Part B}
-    \lipsum[4]
 
 \section{Testing}
   \subsection{Part A}
-    \lipsum[5]
+    Designs for the MUX and DEMUX schematics were created in Xilinx ISE, as outlined in Figures 2 and 3 in Section III. From the designs created, two custom symbols for the MUX and DEMUX were made, as shown in Figure 4, which allows for the use of modular design, which has the advantage of allowing components to be re-used, or allowing changes made to the component to be automatically transferred throughout the design hierarchy. The custom symbols can be created by expanding the Design Utilities menu under the Processes window, and double clicking on Create Schematic Symbol. Next, the synthesis and pin assignment steps were done. Input signals were wired to separate switches on the development FPGA, and output signals were wired to separate LEDs on the board. The design was verified using ISim by first creating a VHDL script and coding the expected outputs, as determined by the circuit design and prelab. A picture of the DEMUX test can be found in Figure 6. Finally, a programming file was created and the bitstream was uploaded to the FPGA board using Adept.
 
   \subsection{Part B}
-    \lipsum[6]
+    A schematic for the control circuit was created using Xilinx ISE according to the design in the lab manual, and developed in the prelab. Like in part one, the synthesis and pin assignment steps were done, with inputs being wired to separate switches, and the outputs being wired to separate LEDs. A VHDL script was created, with the truth table in Table 3 coded in to test the outputs, and the design was tested using ISim (Figure 7). Finally, a programming file was generated, and the bitstream was uploaded to the development board FPGA using Adept.
 
 \section{Questions}
 
@@ -125,4 +161,15 @@
   \subsection{Part B Assembler Code}
     \lstinputlisting{partb.s}
 
+\newpage
+% \@
+% % \pagenumbering{gobble}
+% % \addcontentsline{toc}{section}{Marking Sheet}
+% % \section{Marking Sheet}
+% % \clearpage
+% \addtocounter{section}{1}
+% % \addcontentsline{toc}{section}{Marking Sheet}
+% \addcontentsline{toc}{section}{\protect\numberline{\thesection} Marking Sheet}
+
+\section{Marking Sheet}
 \end{document}
