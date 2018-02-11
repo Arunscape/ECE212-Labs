@@ -12,6 +12,10 @@
 \usepackage{geometry}
 \usepackage{array}
 \usepackage{lipsum}
+
+\usepackage{graphicx}
+\usepackage{float}
+\graphicspath{ {images/} }
 %
 % \newenvironment{changemargin}[2]{%
 % \begin{list}{}{%
@@ -134,6 +138,15 @@
     we branched to a label `endloop', which increments the addresses stored in a1 and a2 by 4,
     and then branches to the loop, where the process is repeated.
 
+    % \begin{figure}
+    %   \includegraphics{/path/to/figure}
+    %   \caption{}
+    %   \label{}
+    % \end{figure}
+
+    \subsubsection{Part A Sample Calculation of Conversion}
+      TODO
+
   \subsection{Part B}
     The design for Part B was very similar to Part A. The address register a1 still
     initially points to 0x2300000, but this time, a2 now points to 0x2320000, which is
@@ -154,12 +167,43 @@
     converted value is then stored at the memory location pointed to by a2, and
     the addresses stored in a1 and a2 are incremented by 4 before the loop
     starts over.
+
+    % \begin{figure}
+    %   \includegraphics{/path/to/figure}
+    %   \caption{}
+    %   \label{}
+    % \end{figure}
+
+    \subsubsection{Part B Sample Calculation of Conversion}
+      TODO
+
 \section{Testing}
   \subsection{Part A}
-    Designs for the MUX and DEMUX schematics were created in Xilinx ISE, as outlined in Figures 2 and 3 in Section III. From the designs created, two custom symbols for the MUX and DEMUX were made, as shown in Figure 4, which allows for the use of modular design, which has the advantage of allowing components to be re-used, or allowing changes made to the component to be automatically transferred throughout the design hierarchy. The custom symbols can be created by expanding the Design Utilities menu under the Processes window, and double clicking on Create Schematic Symbol. Next, the synthesis and pin assignment steps were done. Input signals were wired to separate switches on the development FPGA, and output signals were wired to separate LEDs on the board. The design was verified using ISim by first creating a VHDL script and coding the expected outputs, as determined by the circuit design and prelab. A picture of the DEMUX test can be found in Figure 6. Finally, a programming file was created and the bitstream was uploaded to the FPGA board using Adept.
+    Initially, we visually tested our code by using the debugger in Eclipse IDE.
+    While stepping through the code, we would check the values at relevant memory
+    locations, and the data and address registers. When the bugs were ironed out,
+    we went on to the next phase of testing.
+    Our code was tested using the provided \textit{Lab1Test.s} file. More specifically,
+    this program was moved into the project folder, downloaded to the ColdFire microcontroller,
+    and the MTTTY serial monitor was loaded to monitor the expected output. Our code was
+    further tested by replacing the `DataStorage.s' file with the other variants provided
+    named: `DataStorage1.s', `DataStorage2.s', and `DataStorage3.s'.
+    Finally, our program, which produced the correct output, was verified by a lab TA.
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=0.4\textwidth]{tst1a.png}
+      \caption{MTTTY output when testing our Part A solution}
+    \end{figure}
 
   \subsection{Part B}
     A schematic for the control circuit was created using Xilinx ISE according to the design in the lab manual, and developed in the prelab. Like in part one, the synthesis and pin assignment steps were done, with inputs being wired to separate switches, and the outputs being wired to separate LEDs. A VHDL script was created, with the truth table in Table 3 coded in to test the outputs, and the design was tested using ISim (Figure 7). Finally, a programming file was generated, and the bitstream was uploaded to the development board FPGA using Adept.
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=0.4\textwidth]{tst1b.png}
+      \caption{MTTTY output when testing our Part B solution}
+    \end{figure}
 
 \section{Questions}
 
@@ -167,13 +211,15 @@
       \textit{``What happens when there is no exit code ‘0x0D’ provided in the initialization process? Would it cause a problem? Why or why not?''}
       \\ \\
       \noindent\textbf{A:}
-      \lipsum[7]
+      % \lipsum[7]
+      It would cause an infinite loop, yo
 
     \subsection{Question 2}
       \textit{``How can our code be modified to provide a variable address range? For example, what if I only wanted to convert the first 10 data entires? ''}
       \\ \\
       \noindent\textbf{A:}
-      \lipsum[8]
+      % \lipsum[8]
+      You could, like, use a counter in d2, or maybe a stack idk
 
 \section{Conclusion}
   \lipsum[9]
@@ -188,10 +234,14 @@
     \lstinputlisting{parta.s}
   % \end{changemargin}
 \newpage
-
+  \subsection{Part A Flowchart Diagram}
+    TODO
+\newpage
   \subsection{Part B Assembler Code}
     \lstinputlisting{partb.s}
-
+\newpage
+  \subsection{Part B Flowchart Diagram}
+    TODO
 \newpage
 % \@
 % % \pagenumbering{gobble}
