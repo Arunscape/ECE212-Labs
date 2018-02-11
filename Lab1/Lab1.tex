@@ -277,6 +277,18 @@
       \\ \\
       \noindent\textbf{A:}
       % \lipsum[8]
+      Assuming the data range would be fixed and hardcoded into the Assembly code it would be possible to 
+      write the max range (ie. 10) into an unused data register such as \%d3.  Then, instead of checking
+      for the enter code on each iteration where there is an invalid value, check the value stored in 
+      \%d3 before checking the validity of the value stored in the current memory address.  If \%d3 is
+      zero then jump to the \textbf{end} label, breaking the loop.  Another way to do it would be again
+      to assume that the number of iterations is fixed and the size of data being checked is fixed as being
+      long-words would be to check the value of the memory address stored in (\%a1) after each iteration 
+      before returning to the beginning of the loop and after the memory addresses have been incremented.  
+      If at that point the memory address is [(initial memory address 0x2300000) + (0x4 * N)], where N is
+      the number of desired iterations (this value would be hardcoded, this is just a general case), then
+      jump to the \textbf{end} label, breaking the loop.  This way would be more memory efficient as it
+      does not require an additonal data register and the modification of a counter value.  
       \textbf{TODO}
       You could, like, use a counter in some other data register like d3
       and the main loop would go, and at the end, we can do a sub.l \#1, \%d3,
