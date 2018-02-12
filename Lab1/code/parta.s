@@ -60,7 +60,7 @@ loop:               /* the looping function                       */
 
  cmp.l #0x67, %d2   /* compare the inval to "g"                   */
  blt littleathruf   /* if it is less than "g" then it must be in  */
-                    /* the range "a" through "F"                  */
+                    /* the range "a" through "f"                  */
                     /* thus go to the part of the code to handle  */
                     /* these values                               */
 
