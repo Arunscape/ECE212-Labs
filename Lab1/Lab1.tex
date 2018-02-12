@@ -89,34 +89,35 @@
 \section{Introduction}
   The purpose of this lab is to learn and test with the Assembly language in a hands on environment
   in order to solidify the concepts learned in class and to improve our skill in the language.  In
-  addition we will be learning how to handle the Netburner ColdFire boards directly, manipulating
-  the contents of their memory and data structures.  Finally we are going to learn how to work inside
+  addition, we will be learning how to handle the Netburner ColdFire boards directly, manipulating
+  the contents of their memory and data structures.  Finally, we are going to learn how to work inside
   the Eclipse IDE environment and how to properly use the powerful tools that come alongside it.
 
-  The code will be developped for the Netburner ColdFire Platform, which has some parameters that should
-  be kept in mind throughout testing.  There is multiple Data and Address registers, and the memory can
+  The code will be developed for the Netburner ColdFire Platform, which has some parameters that should
+  be kept in mind throughout testing.  There are multiple Data and Address registers, and the memory
   is indexed by hexadecimal codes.  The data and the stored locations can each be modified directly, values
-  can be compared and the code can branch into different sections depending on the values of the CCR bits,
+  can be compared and the code can branch into different sections depending on the values of the CCR
+  (Condition Code Register) bits,
   which store information about the outcome from the last comparison or valid operation, such as if a
   value is negative or zero.  These will be used to execute code conditionally.
 
-  The lab will be split into two sections, each with a different goal but with similar implementation.
+  The lab will be split into two sections, each with a different goal but with similar implementations.
   For one part we will be taking in an ASCII value and if the character it represents is a character
   included in the symbols for hexadecimal numbers then that hexadecimal value is output, otherwise
   it returns an error.  For the second part an ASCII value is taken in, and if the character it represents
   is a letter in the English language (A-Z) then the ASCII code for the character in the opposite case
-  is output.  Thus valid uppercase english letters are converted to their lowercase equivalents in ASCII
+  is output.  Thus, valid uppercase English letters are converted to their lowercase equivalents in ASCII
   and vice versa.
 
-  These experiments will introduce the general programming practices of loops, if - then - else statements,
-  and the manipulation of stored data.  More specifically to Assembly this will introduce the movement of
+  These experiments will introduce implementing high level programming practices of loops, if - then - else statements,
+  using the Assembly language. More specifically, this will introduce the movement of
   memory and data to and from different parts of the Netburner chip, using techniques such as referencing
   memory addresses and copying data to local data registers.  The debugger tools of the IDE will be used
   to closely examine this movement and to analyze all changes to the data in order to solve issues in
   development as well as to test the code.  This is all building off the concepts explored in Lab 0.
 
-  They will also introduce the computing science practice of Pair Programming, wherein two people work on
-  one computer to develop and test code in tandem.  The partners are divided into the Driver and the Navigator.
+  The computing science practice of Pair Programming is also introduced, where two people
+  develop and test code in tandem.  The partners are divided into the Driver and the Navigator.
   In this structure the Driver is the one responsible for the physical typing of the code into the computer,
   and the Navigator reviews this code and clarifies the meaning of each passage in order to find bugs faster
   and to improve efficiency in testing.  The two partners should communicate constantly and switch in order
@@ -277,7 +278,7 @@
       % \lipsum[8]
       Assuming the data range would be fixed and hardcoded into the Assembly code it would be possible to
       write the max range (ie. 10) into an unused data register such as \%d3.  Then, instead of checking
-      for the enter code on each iteration where there is an invalid value, check the value stored in
+      for the enter code on each iteration where there is an invalid value, we could check the value stored in
       \%d3 before checking the validity of the value stored in the current memory address.  If \%d3 is
       zero then jump to the \textbf{end} label, breaking the loop.  Another way to do it would be again
       to assume that the number of iterations is fixed and the size of data being checked is fixed as being
@@ -289,9 +290,9 @@
       does not require an additonal data register and the modification of a counter value.
 
 \section{Conclusion}
-  This lab demonstrated how to use the Assembly language to perform operations
-  and modify data while moving it around the ColdFire architechture.  In addition
-  the lab improved our understanding of the debugger software, a very powerful
+  This lab demonstrated how to perform operations
+  and modify data while moving it around using the Assembly language for the ColdFire architechture.
+  In addition, the lab improved our understanding of the debugger software, a very powerful
   tool in the development of this kind of code.  The main issue we found was related
   to the hardware itself, as there was some instances where the code did not execute
   properly and the board itself needed to be reset.  The other issue we faced was mostly
