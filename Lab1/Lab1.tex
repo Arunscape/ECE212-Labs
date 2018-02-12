@@ -138,7 +138,7 @@
     was used to keep track of the memory location of where the next long word of
     our converted data would go. The data register d2 was chosen to temporarily store
     data so we could do comparisons and process the input data.
-    The \textit{Setzeros.s} and the \textit{DataSrorage.s}
+    The \textit{SetZeros.s} and the \textit{DataStorage.s}
     files, which were provided, were used to initialize memory contents.
 
     We started with a loop branch that served as our main looping function. This
@@ -151,7 +151,7 @@
     For Part A, an input character was valid if it was an ASCII character from 0-9, A-F, or a-f.
     In other words, the data was accepted if it was in the following ranges: 0x30-0x39,
     0x41-0x46, or 0x61-0x66. If the input character was invalid, we brached to a label
-    named `err', which would put the error code `FFFFFFFF' in the memory location
+    named `err', which would put the error code `0xFFFFFFFF' in the memory location
     pointed to by a2, which keeps track of where our output data goes.
 
     If the input character was valid, we had three branches to take care of each
@@ -195,8 +195,8 @@
 
     Once again, we had a loop branch that initially loads input data from the location
     pointed to by a1 into data register d2, and the ASCII `Enter' code still terminates
-    the program, as before. In Part B, valid inputs are the ASCII characters A-Z and a-z.
-    (0x41-0x5A and 0x61-0x7A)
+    the program, as before. In Part B, valid inputs are the ASCII characters A-Z and a-z
+    (0x41-0x5A and 0x61-0x7A).
     Error handling was also similar to Part A, where the value 0xFFFFFFFF was stored at the
     memory location pointed to by a2. We had two branches to handle the two ranges of accepted
     characters.
