@@ -124,13 +124,15 @@
   will also improve the quality of code from each partner.
 
 
-\section{Design} \subsection{Part A}
-For the first part of the lab, we wrote code to add the contents of two arrays
+\section{Design}
+
+\subsection{Part A: Different Addressing Modes}
+For part A of this lab, we wrote code to add the contents of two arrays
 stored at different memory locations, and the result is stored at another
 specified memory location. This is done using three  different addressing modes.
 In the first part, we use Register Indirect With Offset, in the second part, we
 use Indexed Register Indirect, and in the third part, we use Postincrement
-Register Indirect.  All information is stored as a long word (32 bits). The
+Register Indirect. All information is stored as a long word (32 bits). The
 operational code is provided at memory location 0x2300000, which contains the
 information for where to access the arrays in memory and where to store the sum.
 For example, the number stored at 0x2300000 contains the size of the arrays. The
@@ -222,28 +224,26 @@ operational code is stored as follows:
 
 
 
-  \subsection{Part B}
-  \textbf{from the last lab}
-    The design for Part B was very similar to Part A. The address register a1 still
-    initially points to 0x2300000, but this time, a2 now points to 0x2320000,
-    which is where the converted data is stored.The same data register d2 was
-    used to temporarily store the input and process the data. Just like in Part
-    A, the \textit{SetZeros.s} and the \textit{DataStorage.s} files were used to
-    initialize memory contents as well.
+  \subsection{Part B: Trapezoidal Rule}
 
-    Once again, we had a loop branch that initially loads input data from the
-    location pointed to by a1 into data register d2, and the ASCII `Enter' code
-    still terminates the program, as before. In Part B, valid inputs are the
-    ASCII characters A-Z and a-z (0x41-0x5A and 0x61-0x7A). Error handling was
-    also similar to Part A, where the value 0xFFFFFFFF was stored at the memory
-    location pointed to by a2. We had two branches to handle the two ranges of
-    accepted characters.
+    In part B of this lab,we write a program that calculates the area
+    underneath a curve ($y=f(x)$), using the trapezoidal rule:
+    $$ \int_a^b f(x) dx \approx \sum_{k=1}^{N} \frac{f(x_{k-1})+f(x_k)}{2}\Delta x_k$$
+    The x and y data points for the curve are stored in arrays, at different
+    memory addresses. For convenience, the distance between each X data point is either one
+    or 2 units. Similar to part A, we have some operational code stored at 0x2300000, which contains the
+    information for where to access the arrays in memory and where to store the output.
+    The operational code is as follows:
 
-    For example, if an input character was in the range a-z, a difference was
-    taken relative to the ASCII character `a', and added to the ASCII character
-    `A'. The converted value is then stored at the memory location pointed to by
-    a2, and the addresses stored in a1 and a2 are incremented by 4 before the
-    loop starts over. The flowchart diagram can be found in the Appendix.
+    \begin{enumerate}
+      \item 0x2300000 - Number of Data Points
+      \item 0x2300004 - Address of where the X data points are stored
+      \item 0x2300008 - Address of where the Y data points are stored
+      \item 0x230000C - Address of temporary storage space
+      \item 0x2300010 - Address of where to store the final output
+    \end{enumerate}
+
+
 
     \begin{figure}[h!]
       \centering
@@ -267,44 +267,51 @@ operational code is stored as follows:
   \textbf{from the last lab}
     Initially, we visually tested our code by using the debugger in Eclipse IDE.
     While stepping through the code, we would check the values at relevant
-    memory locations, and the data and address registers. When the bugs were
-    ironed out, we went on to the next phase of testing. Our code was tested
-    using the provided \textit{Lab1Test.s} file. More specifically, this program
-    was moved into the project folder, downloaded to the ColdFire
+    memory locations, and the data and address registers. Initially, for part 3,
+    we had an error where the sum calculated in the output array was all zeros.
+    However, we later discovered that while exiting our loop in part 2, we
+    jumped to the end of the program, so part 3 would never run.
+    %When the bugs were ironed out,
+    After we fixed this minor bug, we went on to the next phase of testing. Our code
+    was tested using the provided \textit{Lab2aTest.s} file. More specifically,
+    this program was moved into the project folder, downloaded to the ColdFire
     microcontroller, and the MTTTY serial monitor was loaded to monitor the
     expected output. Our code was further tested by replacing the
     `DataStorage.s' file with the other variants provided named:
     \textit{DataStorage1.s}, \textit{DataStorage2.s}, and
     \textit{DataStorage3.s}. Finally, our program, which produced the correct
-    output, was verified by a lab TA.
-
-    \begin{figure}[H]
+    output, was verified by a lab TA, who futher tested our code by modifying
+    the DataStoraage file and verifying the output.
+    \begin{figure}[h!]
       \centering
-      \includegraphics[width=0.4\textwidth]{part1ds5.jpg}
+      \includegraphics[width=.65\textwidth]{part1ds5.jpg}
       \caption{MTTTY output when testing our Part A solution}
     \end{figure}
 
   \subsection{Part B}
-  \textbf{from the last lab}
-    The procedure for testing our code for part B was very similar to the process
+    Although the parts were different, the procedure for testing our code for part B was similar to the process
     described above in Part A. We visually inspected our code in the Eclipse
     IDE, used the Eclipse debugger to step through our code, and monitor
-    relevant memory addresses and registers. When we were confident that we had
-    a working solution, we used the provided files \textit{Lab1Test.s}, and the
-    \textit{DataStorage*.s} files to verify our solution by downloading the
+    relevant memory addresses and registers. We initially got a huge number, above 63 million,
+    which we correctly identified as an off-by-one error. This problem was
+    rectified by subtracting one from d0, which is what we used to store the total number of points.
+    When we were confident that we had
+    a working solution, we used the provided files \textit{Lab2bTest.s}, and the
+  \textit{Datastorage5.s} files to verify our solution by downloading the
     program to the ColdFire microcontroller, and monitoring the output in MTTTY.
-    Finally, our solution was verified by a lab TA.
+    Finally, our solution was verified by a lab TA. As per the lab instructions, we used \textit{DataStorage5.s} and \textit{SetZeros5.s}
+    files, although we did further test our program using \textit{DataStorage4.s} with a lab TA and found no issues.
 
-    \begin{figure}[H]
-      \centering
-      \includegraphics[width=0.4\textwidth]{part2ds4.jpg}
-      \caption{MTTTY output when testing our Part B solution}
-    \end{figure}
+    % \begin{figure}[H]
+    %   \centering
+    %   \includegraphics[width=0.6\textwidth]{part2ds4.jpg}
+    %   \caption{MTTTY output when testing our Part B solution with \textit{Datastorage4.s}}
+    % \end{figure}
 
-    \begin{figure}[H]
+    \begin{figure}[h!]
       \centering
-      \includegraphics[width=0.4\textwidth]{part2ds5.jpg}
-      \caption{MTTTY output when testing our Part B solution}
+      \includegraphics[width=0.9\textwidth]{part2ds5.jpg}
+      \caption{MTTTY output when testing our Part B solution with \textit{DataStorage5.s}}
     \end{figure}
 
 \section{Questions}
@@ -325,8 +332,7 @@ operational code is stored as follows:
 
 \section{Conclusion}
 \textbf{from the last lab}
-we encountered difficulties in part 1 because we accicdentally ended the program
-early This lab demonstrated how to perform operations and modify data while
+This lab demonstrated how to perform operations and modify data while
 moving it around using the Assembly language for the ColdFire architechture. In
 addition, the lab improved our understanding of the debugger software, a very
 powerful tool in the development of this kind of code.  The main issue we found
