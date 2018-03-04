@@ -18,7 +18,7 @@
 \graphicspath{ {images/} }
 
 \usepackage{float}
-\usepackage[hidelinks]{hyperref}
+% \usepackage[hidelinks]{hyperref}
 % \usepackage[section]{placeins}
 %
 % \newenvironment{changemargin}[2]{%
@@ -33,6 +33,7 @@
 % \item[]}{\end{list}}
 
 % \usepackage{tabu}
+\usepackage{blindtext}
 %actual document
 \begin{document}
 
@@ -131,6 +132,7 @@
     The \textit{SetZeros.s} and the \textit{DataStorage.s}
     files, which were provided, were used to initialize memory contents.
 
+    \subsubsection{Part 1}
     We started with a loop branch that served as our main looping function. This
     loop first starts by moving data from a memory location pointed to by a1, to
     the data register d2 so that we could start comparing the input data to known ASCII values.
@@ -144,6 +146,7 @@
     named `err', which would put the error code `0xFFFFFFFF' in the memory location
     pointed to by a2, which keeps track of where our output data goes.
 
+    \subsubsection{Part 2}
     If the input character was valid, we had three branches to take care of each
     of the accepted ranges of input. For example, in the branch that took care of the
     input range A-F, the ASCII value of `A' was subtracted from the input value, and
@@ -155,24 +158,30 @@
     and then branches to the loop, where the process is repeated. The flowchart diagram can
     be found in the Appendix.
 
-    % \begin{figure}
-    %   \includegraphics{/path/to/figure}
-    %   \caption{}
-    %   \label{}
-    % \end{figure}
+    \subsubsection{Part 3}
+    \blindtext
 
-    \subsubsection{Part A Sample Calculations of Conversion}
-        \textbf{from the last lab}
-        input = `9' = 0x39\\
-        0x39 - 0x30 = 0x9\\
-        \\
-        input = `E' = 0x45\\
-        0x45 - 0x41 = 0x4\\
-        0x4 + 0xA = 0xE\\
-        \\
-        input = `d' = 0x64\\
-        0x64 - 0x61 = 0x3\\
-        0x3 + 0xA = 0xD
+    \subsubsection{Part 4}
+    \blindtext
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=.6\textwidth]{mema.jpg}
+      \caption{\textbf{need a better caption}Layout of data}
+    \end{figure}
+
+    % \subsubsection{Part A Sample Calculations of Conversion}
+    %     \textbf{from the last lab}
+    %     input = `9' = 0x39\\
+    %     0x39 - 0x30 = 0x9\\
+    %     \\
+    %     input = `E' = 0x45\\
+    %     0x45 - 0x41 = 0x4\\
+    %     0x4 + 0xA = 0xE\\
+    %     \\
+    %     input = `d' = 0x64\\
+    %     0x64 - 0x61 = 0x3\\
+    %     0x3 + 0xA = 0xD
 
 
 
@@ -198,21 +207,21 @@
     the addresses stored in a1 and a2 are incremented by 4 before the loop
     starts over. The flowchart diagram can be found in the Appendix.
 
-    % \begin{figure}
-    %   \includegraphics{/path/to/figure}
-    %   \caption{}
-    %   \label{}
-    % \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.6\textwidth]{memb.jpg}
+      \caption{\textbf{need a better caption}Layout of data}
+    \end{figure}
 
-    \subsubsection{Part B Sample Calculations of Conversion}
-\textbf{from the last lab}
-    input = `M' = 0x4D\\
-    0x4D + 0x20 = 0x6D\\
-    0x6D = 'm'\\
-    \\
-    input = `d' = 0x64\\
-    0x64 - 0x20 = 0x44\\
-    0x44 = 'D'
+%     \subsubsection{Part B Sample Calculations of Conversion}
+%     \textbf{from the last lab}
+%     input = `M' = 0x4D\\
+%     0x4D + 0x20 = 0x6D\\
+%     0x6D = 'm'\\
+%     \\
+%     input = `d' = 0x64\\
+%     0x64 - 0x20 = 0x44\\
+%     0x44 = 'D'
 
 
 \section{Testing}
@@ -231,7 +240,7 @@
 
     \begin{figure}[H]
       \centering
-      \includegraphics[width=0.4\textwidth]{tst1a.png}
+      \includegraphics[width=0.4\textwidth]{part1ds5.jpg}
       \caption{MTTTY output when testing our Part A solution}
     \end{figure}
 
@@ -247,7 +256,13 @@
 
     \begin{figure}[H]
       \centering
-      \includegraphics[width=0.4\textwidth]{tst1b.png}
+      \includegraphics[width=0.4\textwidth]{part2ds4.jpg}
+      \caption{MTTTY output when testing our Part B solution}
+    \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.4\textwidth]{part2ds5.jpg}
       \caption{MTTTY output when testing our Part B solution}
     \end{figure}
 
@@ -301,25 +316,26 @@
 
 \newpage
 \section{Appendix}
-\textbf{from the last lab}
   %\textwidth=600pt
   \subsection{Part A Assembler Code}
     % \begin{changemargin}{-2cm}{-2cm}
     \lstinputlisting{code/parta.s}
   % \end{changemargin}
 \newpage
-\textbf{from the last lab}
+
+
   \subsection{Part A Flowchart Diagram}
     \vspace{2cm}
-    \noindent\makebox[\textwidth]{\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{partaflowchart.png}}
+    \noindent\makebox[\textwidth]{\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{partaflowchart.jpg}}
 \newpage
+
   \subsection{Part B Assembler Code}
     \lstinputlisting{code/partb.s}
 \newpage
-\textbf{from the last lab}
+
   \subsection{Part B Flowchart Diagram}
   \vspace{2cm}
-    \noindent\makebox[\textwidth]{\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{partbflowchart.png}}
+    \noindent\makebox[\textwidth]{\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{partbflowchart.jpg}}
 \newpage
 % \@
 % % \pagenumbering{gobble}
