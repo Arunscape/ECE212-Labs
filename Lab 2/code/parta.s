@@ -31,7 +31,7 @@ movem.l %d2-%d7/%a2-%a5,(%a7)
 /*Part A **********************************************************/
 /* adding with register indirect with offset*/
 
-lea 0x230000C, %a1 /* location of the array where result will be stored */
+lea 0x230000C, %a1 /* location of where result will be stored */
 lea 0x2300004, %a2 /* location of the array where address of first array */
 lea 0x2300008, %a3 /* location of the array where address of second array */
 move.l (%a1), %a1
@@ -112,6 +112,6 @@ bra loopc
 end:
 /* DO NOT MODIFY THIS --------------------------------------------*/
 movem.l (%a7),%d2-%d7/%a2-%a5 /*Restore data and address registers */
-lea      40(%a7),%a7 
+lea      40(%a7),%a7
 rts
 /*----------------------------------------------------------------*/
