@@ -362,21 +362,25 @@ operational code is stored as follows:
               \begin{enumerate}
                 \item Great if you only plan on accessing one thing
                 \item Doesn't modify the address register's value
-                \item Can access any memory address you want relative to the value stored in the address register
+                \item Can access any specific memory address you want relative to the value 
+                      stored in the address register
               \end{enumerate}
             \item Indexed Register Indirect
             \begin{enumerate}
               \item Doesn't modify the address register's value
               \item You can offset in terms of a variable, so you have greater control over the offset
-              \item Works well in loops
+              \item Works well in loops in order to access multiple sequential memory locations 
+                    while being able to easily return to the original address as the value in the 
+                    address register is never changed
             \end{enumerate}
             \item Postincrement Register Indirect
             \begin{enumerate}
               \item You don't have to keep track of the offset, it automatically
                     increments the address register by the size of the data
                     you're working with
-              \item Very useful for dealing with arrays
-              \item Works nicely in loops
+              \item Very useful for dealing with arrays, as in part B
+              \item Works nicely in loops to access multiple sequential memory 
+                    locations and be pointing to the next memory location afterwards
             \end{enumerate}
           \end{enumerate}
 
@@ -386,8 +390,8 @@ operational code is stored as follows:
           \textbf{A: }
           Instead of hard coding two scenarios where $\Delta x$ is either 1 or 2,
           we could just divide $f(x_{k-1})+f(x_k)$ by 2 with a bit shift operation
-          to the right by one, and then use the \textit{muls.l} instruction
-          to multiply the result by $\Delta x$ to match the equation for the trapezoidal rule.
+          to the right by one at each iteration rather than at the end, and then use the \textit{muls.l} 
+          instruction to multiply the result by $\Delta x$ to match the equation for the trapezoidal rule.
     \item \textit{From the data points, what is the function (y=f(x))? What is the percent error between the
                   theoretical calculated area and the one obtain in your program?}\\
           % \textbf{A: }
@@ -401,7 +405,7 @@ operational code is stored as follows:
   \end{enumerate}
 
 \section{Conclusion}
-\textbf{from the last lab}
+\textbf{FROM THE LAST LAB  R E P L A C E T H I S!}
 This lab demonstrated how to perform operations and modify data while
 moving it around using the Assembly language for the ColdFire architechture. In
 addition, the lab improved our understanding of the debugger software, a very
