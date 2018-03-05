@@ -311,7 +311,7 @@ operational code is stored as follows:
     \textit{DataStorage3.s}. Finally, our program, which produced the correct
     output, was verified by a lab TA, who futher tested our code by modifying
     the DataStoraage file and verifying the output.
-    \begin{figure}[h!]
+    \begin{figure}[H]
       \centering
       \includegraphics[width=.65\textwidth]{part1.jpg}
       \caption{MTTTY output when testing our Part A solution}
@@ -346,7 +346,7 @@ operational code is stored as follows:
     %   \caption{MTTTY output when testing our Part B solution with \textit{Datastorage4.s}}
     % \end{figure}
 
-    \begin{figure}[h!]
+    \begin{figure}[H]
       \centering
       \includegraphics[width=0.9\textwidth]{part2ds5.jpg}
       \caption{MTTTY output when testing our Part B solution with \textit{DataStorage5.s}}
@@ -355,8 +355,27 @@ operational code is stored as follows:
 \section{Questions}
   \begin{enumerate}
     \item \textit{What are the advantages of using the different addressing modes covered in this lab?}\\
-          \textbf{A: }
-          \blindtext
+          % \textbf{A: }
+          \begin{enumerate}
+            \item Register Indirect With Offset
+              \begin{enumerate}
+                \item Great if you only plan on accessing one thing
+                \item Doesn't modify the address which the address register points to
+              \end{enumerate}
+            \item Indexed Register Indirect
+            \begin{enumerate}
+              \item Can use a data register to specify offset
+              \item Doesn't modify the address which the address register points to
+            \end{enumerate}
+            \item Postincrement Register Indirect
+            \begin{enumerate}
+              \item You don't have to keep track of the offset, it automatically
+                    increments the address register by the size of the data
+                    you're working with
+              \item Very useful for arrays
+            \end{enumerate}
+          \end{enumerate}
+
     \item \textit{If the differece between the X data points are not restricted to be either one
                   or two units, how would you modify your program to calculate the area? You do
                   not need to do this in your code.}\\
