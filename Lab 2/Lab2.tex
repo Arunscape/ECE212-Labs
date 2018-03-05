@@ -92,9 +92,9 @@
   to location (offset + address), but in this case the offset is a data register, thus
   the offset can vary depending on the contents of the data register. This is useful
   to reduce redundancy or to handle loops of unknown or variable number of iterations.
-  Finally there is Postincrement Register Indirect, which accesses the location at
+  Finally, there is Postincrement Register Indirect, which accesses the location at
   (address), then afterwards will increment address by the size of the operand.
-  Therefore a longword operation will increase address by 4, a word by 2 and a byte by 1.
+  Therefore, a longword operation will increase address by 4, a word by 2 and a byte by 1.
   This is more useful when iterating over an array of unknown or variable size, when you
   do not need to preserve the value of the original address, and when you are handling
   values of constant size.
@@ -114,15 +114,15 @@
   represented by the curve. This example will focus solely on the two dimensional
   case. It will take an array of points in the x axis, and a second array of
   points in the y axis. These values are formed into Cartesian Coordinates by
-  pairing up the nth term of the first array with the nth term of the second,
-  creating an (x,y) coordinate pair. This represents the nth point on the graph.
+  pairing up the nth term of the first array with the $n^{th}$term of the second,
+  creating an (x,y) coordinate pair. This represents the $n^{th}$ point on the graph.
 
   These can be used alongside the formula for the area under a trapezoid, which is
   $A= h\cdot(\frac{a+b}{2})$. In this formula it is assuming a trapezoid with parallel
   top and bottom of any length (a and b respectively), and a distance between them of
   h.  It takes the average between the two parallel lengths and multiplies them by the
-  distance between them to find the total area enclosed.  In our example this equation
-  and the definitions of the variables will need to be modified somewhat. Instead we
+  distance between them to find the total area enclosed.  In our example, this equation
+  and the definitions of the variables will need to be modified somewhat. Instead, we
   will be rotating the system $\ang{90}$, such that h does not represent the height, but
   rather the horizontal distance along the x axis between the two parallel lines.
   So the values of a and b will instead be
@@ -130,7 +130,7 @@
   difference between their respective x coordinates, or
   $\Delta x$. By assuming that the x coordinate
   of b is greater than that of a it is possible to rewrite the equation in terms of two
-  different cartesian coordinates representing two distinct places on the graph. For our
+  different Cartesian coordinates representing two distinct places on the graph. For our
   calculations it will be easier to divide at the end of the overall calculation. Thus,
   the new equation is $A=\frac{(x_1-x_0)\cdot(y_0+y_1)}{2}$. Using this formula it will be
   possible to gain an approximation of the area under the graph, assuming that the
@@ -384,7 +384,7 @@ operational code is stored as follows:
           \begin{enumerate}
             \item Register Indirect With Offset
               \begin{enumerate}
-                \item Great if you only plan on accessing one thing
+                \item Great if you know the position of data relative to some memory location
                 \item Doesn't modify the address register's value
                 \item Can access any specific memory address you want relative to the value
                       stored in the address register
