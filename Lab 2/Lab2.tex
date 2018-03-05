@@ -147,6 +147,12 @@ operational code is stored as follows:
       \item 0x2300014 - Address of where to store the sum with Postincrement Register Indirect
     \end{enumerate}
 
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=.6\textwidth]{mema.jpg}
+      \caption{An illustration of how the data is organized in part A}
+    \end{figure}
+
     \noindent The \textit{SetZeros.s} and the \textit{DataStorage.s}
     files, which were provided, were used to initialize memory contents.
 
@@ -203,11 +209,6 @@ operational code is stored as follows:
     the counter is incremented by 1, and if it is less than the size of the
     arrays (stored at 0x2300000), the loop continues.
 
-    \begin{figure}[h!]
-      \centering
-      \includegraphics[width=.6\textwidth]{mema.jpg}
-      \caption{An illustration of how the data is organized in part A}
-    \end{figure}
 
     % \subsubsection{Part A Sample Calculations of Conversion}
     %     \textbf{from the last lab}
@@ -243,13 +244,42 @@ operational code is stored as follows:
       \item 0x2300010 - Address of where to store the final output
     \end{enumerate}
 
-
-
     \begin{figure}[h!]
       \centering
       \includegraphics[width=0.6\textwidth]{memb.jpg}
       \caption{An illustration of how the data is organized in part B}
     \end{figure}
+
+    In our initialization, we chose d0 to store the total number of data points,
+    by moving the contents at 0x2300000 to d0, then subtracting 1 from d0 to
+    avoid an off-by-one indexing error. a0 was chosen to store the address of
+    the array with X data points, so the contents at 0x2300004 were moved to a0.
+    Similarly, the contents at 0x2300010 were moved to a2, to store the address
+    of the array with Y data points. Data register d1 was used as a counter, and
+    d7 stores the total area. Both of these data registers were cleared with
+    initial value 0. Initial data points $x_0$ and $y_0$ were stored in d2 and
+    d3, respectively. Once our initialization is done, we enter a main loop,
+    where we decided to do our checks for exiting the loop at the beginning. The
+    loop exits if our counter (d0) is equal to the number of points (d1),
+    otherwise the counter is incremented. In the loop, the contents of the
+    memory address pointed to by a0 is moved to d4, and post incremented, so
+    that d4 holds $x_k$. Similarly, the contents of the memory address pointed
+    to by a1 is moved to d5, and post incremented, so that d5 holds $f(x_k)$. We
+    get $f(x_{k-1})+f(x_k)$ by adding d5 to d3 and storing the result in d3.
+    Then, $\Delta x$ is calculated by subtracting d4 from d2, storing the
+    negation of that result in d2. If $\Delta x$ was 2, we multiplied d3, which
+    was $f(x_{k-1})+f(x_k)$ by 2 and then added the result to d7. If $\Delta x$
+    was not 2, we just added $f(x_{k-1})+f(x_k)$ to d7. At the end of the loop,
+    $x_k$ and $f(x_k)$ from the current iteration are set to be $x_{k-1}$
+    $f(x_{k-1})$ respectively, for the next iteration by moving the contents of
+    d4 to d2 and also moving the contents of d5 to d3. When the loop terminates,
+    we check if the number in d7 is odd by checking its least significant bit.
+    If it is odd, we add one to it. Finally, the number in d7 is divided by 2
+    using a right bit shift operation, and the result is moved into the memory
+    location pointed to by a2, which is where the ourput should go. We check if
+    the number in d7 is odd before dividing it by 2, so that our program would
+    round the number up if we get a fraction, as per the assignment
+    specifications.
 
 %     \subsubsection{Part B Sample Calculations of Conversion}
 %     \textbf{from the last lab}
@@ -270,37 +300,45 @@ operational code is stored as follows:
     memory locations, and the data and address registers. Initially, for part 3,
     we had an error where the sum calculated in the output array was all zeros.
     However, we later discovered that while exiting our loop in part 2, we
-    jumped to the end of the program, so part 3 would never run.
-    %When the bugs were ironed out,
-    After we fixed this minor bug, we went on to the next phase of testing. Our code
-    was tested using the provided \textit{Lab2aTest.s} file. More specifically,
-    this program was moved into the project folder, downloaded to the ColdFire
-    microcontroller, and the MTTTY serial monitor was loaded to monitor the
-    expected output. Our code was further tested by replacing the
-    `DataStorage.s' file with the other variants provided named:
+    jumped to the end of the program, so part 3 would never run. %When the bugs
+    were ironed out, After we fixed this minor bug, we went on to the next phase
+    of testing. Our code was tested using the provided \textit{Lab2aTest.s}
+    file. More specifically, this program was moved into the project folder,
+    downloaded to the ColdFire microcontroller, and the MTTTY serial monitor was
+    loaded to monitor the expected output. Our code was further tested by
+    replacing the `DataStorage.s' file with the other variants provided named:
     \textit{DataStorage1.s}, \textit{DataStorage2.s}, and
     \textit{DataStorage3.s}. Finally, our program, which produced the correct
     output, was verified by a lab TA, who futher tested our code by modifying
     the DataStoraage file and verifying the output.
     \begin{figure}[h!]
       \centering
-      \includegraphics[width=.65\textwidth]{part1ds5.jpg}
+      \includegraphics[width=.65\textwidth]{part1.jpg}
       \caption{MTTTY output when testing our Part A solution}
     \end{figure}
 
   \subsection{Part B}
-    Although the parts were different, the procedure for testing our code for part B was similar to the process
-    described above in Part A. We visually inspected our code in the Eclipse
-    IDE, used the Eclipse debugger to step through our code, and monitor
-    relevant memory addresses and registers. We initially got a huge number, above 63 million,
-    which we correctly identified as an off-by-one error. This problem was
-    rectified by subtracting one from d0, which is what we used to store the total number of points.
-    When we were confident that we had
-    a working solution, we used the provided files \textit{Lab2bTest.s}, and the
-  \textit{Datastorage5.s} files to verify our solution by downloading the
+    Although the parts were different, the procedure for testing our code for
+    part B was similar to the process described above in Part A. We visually
+    inspected our code in the Eclipse IDE, used the Eclipse debugger to step
+    through our code, and monitor relevant memory addresses and registers. We
+    initially got a huge number, above 63 million, which we correctly identified
+    as an off-by-one indexing error. This problem was rectified by subtracting
+    one from d0, which is what we used to store the total number of points. We
+    also included some code towards the end which  would make sure our code
+    rounds up as per the lab specifications if we got a fraction instead of a
+    whole number when calculating the area (as verified by a lab TA). However,
+    this code seemed to have no effect, since our program produced the correct
+    output anyways. Our program still worked with this code, however, so we left
+    it in since it does not change our output and served as a check. In any
+    case, we used the provided files \textit{Lab2bTest.s}, and the
+    \textit{Datastorage5.s} files to verify our solution by downloading the
     program to the ColdFire microcontroller, and monitoring the output in MTTTY.
-    Finally, our solution was verified by a lab TA. As per the lab instructions, we used \textit{DataStorage5.s} and \textit{SetZeros5.s}
-    files, although we did further test our program using \textit{DataStorage4.s} with a lab TA and found no issues.
+    Finally, our solution was verified by a lab TA. As per the lab instructions,
+    we used \textit{DataStorage5.s} and \textit{SetZeros5.s} files, although we
+    did further test our program using \textit{DataStorage4.s} with a lab TA and
+    found no issues.
+
 
     % \begin{figure}[H]
     %   \centering
