@@ -18,7 +18,7 @@
 \graphicspath{ {images/} }
 
 \usepackage{float}
-% \usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks]{hyperref}
 % \usepackage[section]{placeins}
 %
 % \newenvironment{changemargin}[2]{%
@@ -390,13 +390,13 @@ operational code is stored as follows:
           to multiply the result by $\Delta x$ to match the equation for the trapezoidal rule.
     \item \textit{From the data points, what is the function (y=f(x))? What is the percent error between the
                   theoretical calculated area and the one obtain in your program?}\\
-          \textbf{A: }
-          From the data points, we can tell the function is $y=x^2$.\\
+          % \textbf{A: }
+          \\From the data points, we can tell the function is $y=x^2$.\\
           The value obtained in our program was \textbf{170710}.\\
           The actual value should be:\\
           $$\int_0^{80} x^2 dx = \frac{x^3}{3}\Big|_0^{80} = \frac{80^3}{3} = \frac{512000}{3}= \textbf{170666.666...} $$
           Therefore, the percent error is:
-          $$\frac{|\frac{512000}{3}-170710|}{\frac{512000}{3}}\times 100 = \frac{13}{512}\% = \textbf{0.025390625\%}$
+          $$\frac{|\frac{512000}{3}-170710|}{\frac{512000}{3}}\times 100 = \frac{13}{512}\% = \textbf{0.025390625\%}$$
 
   \end{enumerate}
 
@@ -422,7 +422,7 @@ system, Assembly code and Pair Programming practices.
   %\textwidth=600pt
   \subsection{Part A Assembler Code}
     % \begin{changemargin}{-2cm}{-2cm}
-    \lstinputlisting{code/parta.s}
+    \lstinputlisting{code/Lab2a.s}
   % \end{changemargin}
 \newpage
 
@@ -446,7 +446,7 @@ system, Assembly code and Pair Programming practices.
 
 
   \subsection{Part B Assembler Code}
-    \lstinputlisting{code/partb.s}
+    \lstinputlisting{code/Lab2b.s}
 \newpage
 
   \subsection{Part B Flowchart Diagram}
