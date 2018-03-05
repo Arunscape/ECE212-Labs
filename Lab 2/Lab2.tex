@@ -215,7 +215,7 @@ operational code is stored as follows:
     the memory location pointed to by a3, displaced by the value at d1, is added
     to d3. The result stored in d3 is then moved to the memory location a1, also
     displaced by the number stored in d1. At the end of the loop, we increment
-    the offset d1 by 4, and the counter is incrmented by 1. Then, we compare our
+    the offset d1 by 4, and the counter is incremented by 1. Then, we compare our
     counter to the size of the arrays, which is a value stored at 0x2300000, and
     if our counter is less than the size of the array, we continue the loop.
 
@@ -300,7 +300,7 @@ operational code is stored as follows:
     we check if the number in d7 is odd by checking its least significant bit.
     If it is odd, we add one to it. Finally, the number in d7 is divided by 2
     using a right bit shift operation, and the result is moved into the memory
-    location pointed to by a2, which is where the ourput should go. We check if
+    location pointed to by a2, which is where the output should go. We check if
     the number in d7 is odd before dividing it by 2, so that our program would
     round the number up if we get a fraction, as per the assignment
     specifications.
