@@ -294,7 +294,6 @@ operational code is stored as follows:
 
 \section{Testing}
   \subsection{Part A}
-  \textbf{from the last lab}
     Initially, we visually tested our code by using the debugger in Eclipse IDE.
     While stepping through the code, we would check the values at relevant
     memory locations, and the data and address registers. Initially, for part 3,
@@ -309,8 +308,8 @@ operational code is stored as follows:
     replacing the `DataStorage.s' file with the other variants provided named:
     \textit{DataStorage1.s}, \textit{DataStorage2.s}, and
     \textit{DataStorage3.s}. Finally, our program, which produced the correct
-    output, was verified by a lab TA, who futher tested our code by modifying
-    the DataStoraage file and verifying the output.
+    output, was verified by a lab TA, who further tested our code by modifying
+    the DataStorage file and verifying the output.
     \begin{figure}[H]
       \centering
       \includegraphics[width=.65\textwidth]{part1.jpg}
@@ -321,7 +320,7 @@ operational code is stored as follows:
     Although the parts were different, the procedure for testing our code for
     part B was similar to the process described above in Part A. We visually
     inspected our code in the Eclipse IDE, used the Eclipse debugger to step
-    through our code, and monitor relevant memory addresses and registers. We
+    through our code, and monitored relevant memory addresses and registers. We
     initially got a huge number, above 63 million, which we correctly identified
     as an off-by-one indexing error. This problem was rectified by subtracting
     one from d0, which is what we used to store the total number of points. We
@@ -354,25 +353,28 @@ operational code is stored as follows:
 
 \section{Questions}
   \begin{enumerate}
-    \item \textit{What are the advantages of using the different addressing modes covered in this lab?}\\
+    \item \textit{What are the advantages of using the different addressing modes covered in this lab?}
           % \textbf{A: }
           \begin{enumerate}
             \item Register Indirect With Offset
               \begin{enumerate}
                 \item Great if you only plan on accessing one thing
-                \item Doesn't modify the address which the address register points to
+                \item Doesn't modify the address register's value
+                \item Can access any memory address you want relative to the value stored in the address register
               \end{enumerate}
             \item Indexed Register Indirect
             \begin{enumerate}
-              \item Can use a data register to specify offset
-              \item Doesn't modify the address which the address register points to
+              \item Doesn't modify the address register's value
+              \item You can offset in terms of a variable, so you have greater control over the offset
+              \item Works well in loops
             \end{enumerate}
             \item Postincrement Register Indirect
             \begin{enumerate}
               \item You don't have to keep track of the offset, it automatically
                     increments the address register by the size of the data
                     you're working with
-              \item Very useful for arrays
+              \item Very useful for dealing with arrays
+              \item Works nicely in loops
             \end{enumerate}
           \end{enumerate}
 
@@ -380,11 +382,20 @@ operational code is stored as follows:
                   or two units, how would you modify your program to calculate the area? You do
                   not need to do this in your code.}\\
           \textbf{A: }
-          \blindtext
+          Instead of hard coding two scenarios where $\Delta x$ is either 1 or 2,
+          we could just divide $f(x_{k-1})+f(x_k)$ by 2 with a bit shift operation
+          to the right by one, and then use the \textit{muls.l} instruction
+          to multiply the result by $\Delta x$ to match the equation for the trapezoidal rule.
     \item \textit{From the data points, what is the function (y=f(x))? What is the percent error between the
                   theoretical calculated area and the one obtain in your program?}\\
           \textbf{A: }
-          \blindtext
+          From the data points, we can tell the function is $y=x^2$.\\
+          The value obtained in our program was \textbf{170710}.\\
+          The actual value should be:\\
+          $$\int_0^{80} x^2 dx = \frac{x^3}{3}\Big|_0^{80} = \frac{80^3}{3} = \frac{512000}{3}= \textbf{170666.666...} $$
+          Therefore, the percent error is:
+          $$\frac{|\frac{512000}{3}-170710|}{\frac{512000}{3}}\times 100 = \frac{13}{512}\% = \textbf{0.025390625\%}$
+
   \end{enumerate}
 
 \section{Conclusion}
