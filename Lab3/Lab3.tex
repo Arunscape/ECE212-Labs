@@ -20,6 +20,7 @@
 \usepackage{float}
 
 \usepackage[hidelinks]{hyperref}
+
 % \usepackage[section]{placeins}
 %
 % \newenvironment{changemargin}[2]{%
@@ -50,7 +51,7 @@
 
       \vspace{2cm}
 
-      Lab 1: Introduction to Assembly Language.
+      Lab 3: Introduction to Subroutines
 
       \vspace{5cm}
       \Large
@@ -88,11 +89,21 @@
 \newpage
 
 \section{Introduction}
+This lab deals with stack operation (push and pop), segmenting a long program/function into several smaller and simpler subroutines/sub-functions. … ….
+
+
+  \subsection{Part A}
+  In part A, …….
+  \subsection{Part B}
+  \subsection{Part C}
+
   The purpose of this lab is to learn and test with the Assembly language in a hands on environment
   in order to solidify the concepts learned in class and to improve our skill in the language.  In
   addition, we will be learning how to handle the Netburner ColdFire boards directly, manipulating
   the contents of their memory and data structures.  Finally, we are going to learn how to work inside
   the Eclipse IDE environment and how to properly use the powerful tools that come alongside it.
+
+
 
   The code will be developed for the Netburner ColdFire Platform, which has some parameters that should
   be kept in mind throughout testing.  There are multiple Data and Address registers, and the memory
@@ -109,6 +120,7 @@
   is a letter in the English language (A-Z) then the ASCII code for the character in the opposite case
   is output.  Thus, valid uppercase English letters are converted to their lowercase equivalents in ASCII
   and vice versa.
+
 
   These experiments will introduce implementing high level programming practices of loops, if - then - else statements,
   using the Assembly language. More specifically, this will introduce the movement of
@@ -172,18 +184,18 @@
     %   \label{}
     % \end{figure}
 
-    \subsubsection{Part A Sample Calculations of Conversion}
-
-        input = `9' = 0x39\\
-        0x39 - 0x30 = 0x9\\
-        \\
-        input = `E' = 0x45\\
-        0x45 - 0x41 = 0x4\\
-        0x4 + 0xA = 0xE\\
-        \\
-        input = `d' = 0x64\\
-        0x64 - 0x61 = 0x3\\
-        0x3 + 0xA = 0xD
+    % \subsubsection{Part A Sample Calculations of Conversion}
+    %
+    %     input = `9' = 0x39\\
+    %     0x39 - 0x30 = 0x9\\
+    %     \\
+    %     input = `E' = 0x45\\
+    %     0x45 - 0x41 = 0x4\\
+    %     0x4 + 0xA = 0xE\\
+    %     \\
+    %     input = `d' = 0x64\\
+    %     0x64 - 0x61 = 0x3\\
+    %     0x3 + 0xA = 0xD
 
 
 
@@ -214,16 +226,17 @@
     %   \label{}
     % \end{figure}
 
-    \subsubsection{Part B Sample Calculations of Conversion}
+    % \subsubsection{Part B Sample Calculations of Conversion}
+    %
+    % input = `M' = 0x4D\\
+    % 0x4D + 0x20 = 0x6D\\
+    % 0x6D = 'm'\\
+    % \\
+    % input = `d' = 0x64\\
+    % 0x64 - 0x20 = 0x44\\
+    % 0x44 = 'D'
 
-    input = `M' = 0x4D\\
-    0x4D + 0x20 = 0x6D\\
-    0x6D = 'm'\\
-    \\
-    input = `d' = 0x64\\
-    0x64 - 0x20 = 0x44\\
-    0x44 = 'D'
-
+    \subsection{Part C}
 
 \section{Testing}
   \subsection{Part A}
@@ -240,7 +253,7 @@
 
     \begin{figure}[H]
       \centering
-      \includegraphics[width=0.4\textwidth]{tst1a.png}
+      \includegraphics[width=0.4\textwidth]{parta.jpg}
       \caption{MTTTY output when testing our Part A solution}
     \end{figure}
 
@@ -255,14 +268,35 @@
 
     \begin{figure}[H]
       \centering
-      \includegraphics[width=0.4\textwidth]{tst1b.png}
+      \includegraphics[width=0.4\textwidth]{partb.jpg}
       \caption{MTTTY output when testing our Part B solution}
     \end{figure}
+
+    \subsection{Part C}
+      The procedure for testing our code for part B was very similar to the process
+      described above in Part A. We visually inspected our code in the Eclipse IDE,
+      used the Eclipse debugger to step through our code, and monitor relevant
+      memory addresses and registers. When we were confident that we had a working
+      solution, we used the provided files \textit{Lab1Test.s}, and the \textit{DataStorage*.s}
+      files to verify our solution by downloading the program to the ColdFire microcontroller,
+      and monitoring the output in MTTTY. Finally, our solution was verified by a lab TA.
+
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{partc.jpg}
+        \caption{MTTTY output when testing our Part B solution}
+      \end{figure}
+
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{allparts.jpg}
+        \caption{MTTTY output when testing our Part B solution}
+      \end{figure}
 
 \section{Questions}
 
     \subsection{Question 1}
-      \textit{``What happens when there is no exit code ‘0x0D’ provided in the initialization process? Would it cause a problem? Why or why not?''}
+      \textit{``Is it always necessary to implement either callee or caller preservation of registers when calling a subroutine. Why?''}
       \\ \\
       \noindent\textbf{A:}
       % \lipsum[7]
@@ -273,7 +307,7 @@
       program to crash.
 
     \subsection{Question 2}
-      \textit{``How can our code be modified to provide a variable address range? For example, what if I only wanted to convert the first 10 data entires? ''}
+      \textit{`Is it always necessary to clean up the stack. Why? ''}
       \\ \\
       \noindent\textbf{A:}
       % \lipsum[8]
@@ -289,6 +323,26 @@
       the number of desired iterations (this value would be hardcoded, this is just a general case), then
       jump to the \textbf{end} label, breaking the loop.  This way would be more memory efficient as it
       does not require an additonal data register and the modification of a counter value.
+
+      \subsection{Question 3} \textit{`If a proper check for the getstring
+      function was not provided and you have access to the buffer, how would you
+      check to see if a valid \# was entered? A detailed description is
+      sufficient. You do not need to implement this in your code. ''}
+      \\ \\
+      \noindent\textbf{A:}
+        % \lipsum[8]
+        Assuming the data range would be fixed and hardcoded into the Assembly code it would be possible to
+        write the max range (ie. 10) into an unused data register such as \%d3.  Then, instead of checking
+        for the enter code on each iteration where there is an invalid value, we could check the value stored in
+        \%d3 before checking the validity of the value stored in the current memory address.  If \%d3 is
+        zero then jump to the \textbf{end} label, breaking the loop.  Another way to do it would be again
+        to assume that the number of iterations is fixed and the size of data being checked is fixed as being
+        long-words would be to check the value of the memory address stored in (\%a1) after each iteration
+        before returning to the beginning of the loop and after the memory addresses have been incremented.
+        If at that point the memory address is [(initial memory address 0x2300000) + (0x4 * N)], where N is
+        the number of desired iterations (this value would be hardcoded, this is just a general case), then
+        jump to the \textbf{end} label, breaking the loop.  This way would be more memory efficient as it
+        does not require an additonal data register and the modification of a counter value.
 
 \section{Conclusion}
   This lab demonstrated how to perform operations
@@ -310,28 +364,36 @@
   %\textwidth=600pt
   \subsection{Part A Assembler Code}
     % \begin{changemargin}{-2cm}{-2cm}
-    \lstinputlisting{code/parta.s}
+    \lstinputlisting{code/Lab3a.s}
   % \end{changemargin}
 \newpage
   \subsection{Part A Flowchart Diagram}
     \vspace{2cm}
-    \noindent\makebox[\textwidth]{\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{partaflowchart.png}}
+    \noindent\makebox[\textwidth]{\includegraphics[width=\paperwidth,height=.6\paperheight,keepaspectratio]{partaflowchart.jpg}}
 \newpage
   \subsection{Part B Assembler Code}
-    \lstinputlisting{code/partb.s}
+    \lstinputlisting{code/Lab3b.s}
 \newpage
   \subsection{Part B Flowchart Diagram}
   \vspace{2cm}
-    \noindent\makebox[\textwidth]{\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{partbflowchart.png}}
+    \noindent\makebox[\textwidth]{\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{partbflowchart.jpg}}
 \newpage
-% \@
-% % \pagenumbering{gobble}
-% % \addcontentsline{toc}{section}{Marking Sheet}
-% % \section{Marking Sheet}
-% % \clearpage
-% \addtocounter{section}{1}
-% % \addcontentsline{toc}{section}{Marking Sheet}
-% \addcontentsline{toc}{section}{\protect\numberline{\thesection} Marking Sheet}
+\subsection{Part C Assembler Code}
+  % \begin{changemargin}{-2cm}{-2cm}
+  \lstinputlisting{code/Lab3c.s}
+% \end{changemargin}
+\newpage
+\subsection{Part C Flowchart Diagram}
+  \vspace{2cm}
+  \noindent\makebox[\textwidth]{\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{partcflowchart.jpg}}
+\newpage
+% \pagenumbering{gobble}
+% \addcontentsline{toc}{section}{Marking Sheet}
+% \section{Marking Sheet}
+% \clearpage
+\addtocounter{section}{1}
+% \addcontentsline{toc}{section}{Marking Sheet}
+\addcontentsline{toc}{section}{\protect\numberline{\thesection} Marking Sheet}
 
 \section{Marking Sheet}
 \end{document}
