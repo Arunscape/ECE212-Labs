@@ -164,10 +164,10 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     \end{figure}
 
     We started by editing \textit{Lab3a.s}, and chose to back up
-    address registers \textit{a2-a6} and the data registers d2-d7. Since the stack pointer
+    address registers \textit{a2-a6} and the data registers \textit{d2-d7}. Since the stack pointer
     was \textit{a7}, this was accomplished by subtracting 44 from the stack pointer,
-    then using a MOVEM.L command to push the values onto the stack. Then at the end, just before
-    the RTS command in the subroutine, we move the values we backed up to the registers
+    then using the \textit{movem} command to push the values onto the stack. Then at the end, just before
+    the \textit{rts} command in the subroutine, we move the values we backed up to the registers
     as they were before running the subroutine. Address register \textit{a2} was chosen to
     hold the memory location of where the valid numbers which were entered would go, which
     was 0x2300000.
@@ -221,7 +221,7 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     printed to the serial monitor, and moved to the memory location where \textit{a2} points.
 
     Finally, we reach the part where the backed up registers on the stack are restored,
-    and the subroutine hits the RTS command.
+    and the subroutine hits the \textit{rts} command.
 
     % \subsubsection{Part A Sample Calculations of Conversion}
     %
@@ -262,7 +262,7 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
       \caption{Visualization of the stack for Part B}
     \end{figure}
 
-    We begin by backing up the registers $a0-a6$ and $d0-d7$ by
+    We begin by backing up the registers \textit{a0-a6} and \textit{d0-d7} by
     subtracting 60 from the stack pointer, and then using the \textit{movem}
     command to push those values onto the stack. Similarly, at the end of the
     subroutine just before rts, we restore the values by using \textit{movem} to restore the values,
@@ -373,7 +373,7 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
       \caption{Visualization of the stack for Part C}
     \end{figure}
 
-    Just like in part B, we begin by backing up the registers $a0-a6$ and $d0-d7$ by
+    Just like in part B, we begin by backing up the registers \textit{a0-a6} and \textit{d0-d7} by
     subtracting 60 from the stack pointer, and then using the \textit{movem}
     command to push those values onto the stack. Similarly, at the end of the
     subroutine just before rts, we restore the values by using \textit{movem} to restore the values,
