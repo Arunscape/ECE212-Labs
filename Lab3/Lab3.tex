@@ -484,7 +484,7 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
       B, we quickly discovered that we had mixed up the data registers which hold
       the numdivisible and the divisor values, and then verified our
       solution by checking the numbers, and manually calculating the mean ourselves
-      to verify the program's output.     
+      to verify the program's output.
 
       \begin{figure}[H]
         \centering
@@ -508,30 +508,13 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
       \textit{Is it always necessary to implement either callee or caller preservation of registers when calling a subroutine. Why?}
       \\ \\
       \noindent\textbf{A:}
-      % \lipsum[7]
-      Yes. This would cause a problem, because there would be no way to exit the program,
-      so the program would keep reading data and moving the converted values to
-      memory locations, until the program attempts to read or write to a memory
-      location that is restricted or non-existant. This would then cause the
-      program to crash.
+      \lipsum[7]
 
     \subsection{Question 2}
       \textit{Is it always necessary to clean up the stack. Why?}
       \\ \\
       \noindent\textbf{A:}
-      % \lipsum[8]
-      Assuming the data range would be fixed and hardcoded into the Assembly code it would be possible to
-      write the max range (ie. 10) into an unused data register such as \%d3.  Then, instead of checking
-      for the enter code on each iteration where there is an invalid value, we could check the value stored in
-      \%d3 before checking the validity of the value stored in the current memory address.  If \%d3 is
-      zero then jump to the \textbf{end} label, breaking the loop.  Another way to do it would be again
-      to assume that the number of iterations is fixed and the size of data being checked is fixed as being
-      long-words would be to check the value of the memory address stored in (\%a1) after each iteration
-      before returning to the beginning of the loop and after the memory addresses have been incremented.
-      If at that point the memory address is [(initial memory address 0x2300000) + (0x4 * N)], where N is
-      the number of desired iterations (this value would be hardcoded, this is just a general case), then
-      jump to the \textbf{end} label, breaking the loop.  This way would be more memory efficient as it
-      does not require an additonal data register and the modification of a counter value.  Thus it isn't always necessary, though it is usually good practice regardless
+      \lipsum[8]
 
       \subsection{Question 3} \textit{If a proper check for the getstring
       function was not provided and you have access to the buffer, how would you
@@ -545,19 +528,7 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
 		Thanks.''}
 
       \noindent\textbf{A:}
-        % \lipsum[8]
-        Assuming the data range would be fixed and hardcoded into the Assembly code it would be possible to
-        write the max range (ie. 10) into an unused data register such as \%d3.  Then, instead of checking
-        for the enter code on each iteration where there is an invalid value, we could check the value stored in
-        \%d3 before checking the validity of the value stored in the current memory address.  If \%d3 is
-        zero then jump to the \textbf{end} label, breaking the loop.  Another way to do it would be again
-        to assume that the number of iterations is fixed and the size of data being checked is fixed as being
-        long-words would be to check the value of the memory address stored in (\%a1) after each iteration
-        before returning to the beginning of the loop and after the memory addresses have been incremented.
-        If at that point the memory address is [(initial memory address 0x2300000) + (0x4 * N)], where N is
-        the number of desired iterations (this value would be hardcoded, this is just a general case), then
-        jump to the \textbf{end} label, breaking the loop.  This way would be more memory efficient as it
-        does not require an additonal data register and the modification of a counter value.
+        \lipsum[8]
 
 \section{Conclusion}
   This lab demonstrated how to perform operations
