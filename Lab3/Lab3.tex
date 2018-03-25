@@ -173,7 +173,7 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     was 0x2300000.
     Next, at the very end of the file, we
     defined several messages as strings that would be used as prompts. Labels are used to reference
-    these strings, which are used for prompting the user in the MTTTY serial monitor to enter data and what kind of data was applicable to each part.
+    these strings, which are used for prompting the user in the MTTTY serial monitor to enter relevant data for each part.
 
     With the initial setup for this subroutine completed, we moved on to
     actually coding the prompt messages for the program. We begin by
@@ -335,22 +335,71 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     on the stack, add 60 to the stack pointer, and return to the previous subroutine.
 
 
-    % \subsubsection{Part B Sample Calculations of Conversion}
-    %
-    % input = `M' = 0x4D\\
-    % 0x4D + 0x20 = 0x6D\\
-    % 0x6D = 'm'\\
-    % \\
-    % input = `d' = 0x64\\
-    % 0x64 - 0x20 = 0x44\\
-    % 0x44 = 'D'
+    \subsubsection{Sample Calculations}
+    Numbers entered: 1,2,3,4,5\\
+    Numentries: 5\\
+    Divisor: 2\\ \\
+    Min: 1\\
+    Max: 5\\
+    Mean: $\frac{1+2+3+4+5}{5}=3$\\
+    Numdivisible: 2\\
+    Divisible numbers: 2,4
+
 
     \subsection{Part C}
+
+    In Part C, the last subroutine is written, which prints the stats
+    on the numbers entered. Similar to the previous parts, some code was provided
+    such that the stack entry and exit conditions are as follows:
+
+    \begin{itemize}
+      \item Stack Entry Condition =
+        \begin{enumerate}
+          \item How many numbers were divisible by the divisor
+          \item Number of entries (long word)
+          \item Divisor number (long word)
+        \end{enumerate}
+      \item Stack Exit Condtion =
+        \begin{enumerate}
+          \item How many numbers are divisible by the divisor
+          \item Number of entries (long word)
+          \item Divisor number (long word)
+        \end{enumerate}
+    \end{itemize}
+
     \begin{figure}[h!]
       \centering
       \includegraphics[width=.8\textwidth]{designc.jpg}
       \caption{Visualization of the stack for Part A}
     \end{figure}
+
+    Just like in part B, we begin by backing up the registers $a0-a6$ and $d0-d7$ by
+    subtracting 60 from the stack pointer, and then using the \textit{movem}
+    command to push those values onto the stack. Similarly, at the end of the
+    subroutine just before rts, we restore the values by using \textit{movem} to restore the values,
+    then add 60 to the stack pointer before returning to the previous subroutine.
+    We begin by loading 0x2300000 into \textit{a2}, 0x2310000 into \textit{a3},
+    and the divisor, numentries, and numdivisible are read from the stack and
+    moved into data registers.
+
+    At the very end of the program, we define strings just like
+    in Part A, which are printed for the user to read.
+    We begin by first printing the number of entries.
+    A message is printed by pushing the address of a string defined earlier
+    onto the stack, and using \textit{iprintf}. Next, the actual
+    number of entries is pushed onto the stack and printed to the
+    serial monitor using the subroutine \textit{value}. The stack is also cleaned up by
+    adding to the stack pointer. The user is then prompted that the numbers will
+    be printed, which is done in a very similar manner, using \textit{iprintf}. Then,
+    a loop iterates over the numbers, which are indirectly addressed with \textit{a2} with post increment,
+    and printed with the subroutine \textit{value}. The data register holding the numentries
+    is decremented at the end of each iteration of the loop, until it reaches 0, which is
+    when all the numbers have been printed. The min, max, mean, and number of divisible numbers are all printed
+    in a similar manner to how the numentries was printed, with a message
+    printed first using \textit{iprintf}, and then the value being printed
+    with the subroutine \textit{value}. Whenever something is printed, the stack is
+    immediately cleaned up afterwards by adding 4 to the stack pointer whenever a value is printed.
+
 \section{Testing}
   \subsection{Part A}
     Initially, we visually tested our code by using the debugger in Eclipse IDE.

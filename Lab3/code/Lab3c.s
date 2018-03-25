@@ -10,10 +10,10 @@
 /******************************************************************/
 /* General Information ********************************************/
 /* File Name: Lab3c.s **************************************/
-/* Names of Students: Arun and Navras                            **/
+/* Names of Students: Arun Woosaree and Navras Kamal             **/
 /* Date: March 16 2018                                           **/
 /* General Description:                                          **/
-/*                                                               **/
+/* Prints the results of calculation from the stats subroutine   **/
 /******************************************************************/
 Display:
 /*Write your program here******************************************/
@@ -105,9 +105,9 @@ bne loopdivisible
 /*restore values*/
 movem.l (%sp), %a0-%a6/%d0-%d7
 adda.l #60 , %sp
-rts 
+rts
 
-/*End of Subroutine **************************************************/ 
+/*End of Subroutine **************************************************/
 .data
 /*All Strings placed here **************************************************/
 numentries:

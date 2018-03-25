@@ -37,7 +37,7 @@ move.l 64(%sp), %d0 /* divisor */
 move.l 68(%sp) ,%d1 /* numentries */
 
 lea 0x2300000, %a2 /* numbers are here */
-	lea 0x2310000, %a3 /*divisible numbers stored here*/
+lea 0x2310000, %a3 /*divisible numbers stored here*/
 
 move.l %d1, %d7 /*counter*/
 move.l (%a2)+, %d5 /*first number*/
@@ -98,7 +98,7 @@ findmean:
 	bne loopaddvalues
 	/* sum in d4*/
 
-	/*divide by numentries*/
+	/*divide d4 by numentries*/
 	divs.l %d1, %d4
 
 	/* mean should be in d4*/
