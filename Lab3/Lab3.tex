@@ -140,49 +140,86 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
 
 \section{Design}
   \subsection{Part A}
-    For the first part of the lab, the address register a1 was chosen to initially point to
-    memory location 0x2300000, which is the starting point of where the input data was stored.
-    We used this address register to keep track of the memory location of the next long word
-    of data to be read as an input to our program. Even though one memory location is capable
-    of storing one ASCII character, in this lab, 4 memory locations were used to store one
-    ASCII character, as specified in the lab manual.
-    Next, a2 was selected to initially point at the memory location 0x231000, which is the
-    starting location of where our output for the converted values was. This register
-    was used to keep track of the memory location of where the next long word of
-    our converted data would go. The data register d2 was chosen to temporarily store
-    data so we could do comparisons and process the input data.
-    The \textit{SetZeros.s} and the \textit{DataStorage.s}
-    files, which were provided, were used to initialize memory contents.
+    For the first part of the lab, we begin by writing our own subroutine.
+    Some code was already supplied such that:
+    \begin{itemize}
+      \item Stack Entry Condition =
+        \begin{enumerate}
+          \item Space allocated for the number of entries on stack (long word)
+          \item Space allocated for the divisor number on stack (long word)
+        \end{enumerate}
+      \item Stack Exit Condtion =
+        \begin{enumerate}
+          \item Number of entries on stack (long word)
+          \item Divisor number on stack (long word)
+        \end{enumerate}
+    \end{itemize}
 
-    We started with a loop branch that served as our main looping function. This
-    loop first starts by moving data from a memory location pointed to by a1, to
-    the data register d2 so that we could start comparing the input data to known ASCII values.
-    In the first comparison, the input character is compared to `0x0D', which is the ASCII
-    code for the `Enter' key. This code is meant to signal the end of the program, so if
-    the input was the ASCII code for `Enter', we branched to a label that
-    would end our program. The next step was to determine if the input character was valid.
-    For Part A, an input character was valid if it was an ASCII character from 0-9, A-F, or a-f.
-    In other words, the data was accepted if it was in the following ranges: 0x30-0x39,
-    0x41-0x46, or 0x61-0x66. If the input character was invalid, we brached to a label
-    named `err', which would put the error code `0xFFFFFFFF' in the memory location
-    pointed to by a2, which keeps track of where our output data goes.
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=.8\textwidth]{designa.jpg}
+      \caption{Visualization of the stack for Part A}
+    \end{figure}
 
-    If the input character was valid, we had three branches to take care of each
-    of the accepted ranges of input. For example, in the branch that took care of the
-    input range A-F, the ASCII value of `A' was subtracted from the input value, and
-    the difference was added to the hex value 0xA. The converted value is then moved
-    to the memory location pointed to by a2, which keeps track of where our output data goes.
-    Similar steps were done to convert input characters in the other accepted ranges.
-    After converting the input character and moving the output to the location pointed by a2,
-    we branched to a label `endloop', which increments the addresses stored in a1 and a2 by 4,
-    and then branches to the loop, where the process is repeated. The flowchart diagram can
-    be found in the Appendix.
+    We started by editing \textit{Lab3a.s}, and chose to back up
+    address registers a2-a6 and the data registers d2-d7. Since the stack pointer
+    was a7, this was accomplished by subtracting 44 from the stack pointer,
+    then using a movem command to push the values onto the stack. Then at the end. just before
+    the rts command in the subroutine, we move the values we backed up to the registers
+    as they were before running the subroutine. Address register a2 was chosen to
+    hold the memory location of where the valid numbers which were entered would go, which
+    was 0x2300000.
+    Next, at the very end of the file, we
+    defined several messages as strings that would be used as prompts. Labels are used to reference
+    these strings, which are used for prompting the user in the MTTTY serial monitor to enter data.
 
-    % \begin{figure}
-    %   \includegraphics{/path/to/figure}
-    %   \caption{}
-    %   \label{}
-    % \end{figure}
+    With the initial setup for this subroutine completed, we moved on to
+    actually coding the prompt messages for the program. We begin by
+    pushing the Welcome Prompt onto the stack, and using the provided iprintf
+    and cr subroutines to print the welcome message and a cairrage return for the
+    user. Once the message was displayed, we immediately clean up the stack by adding 4
+    to the stack pointer, since the address of the message was pushed onto the stack,
+    and addresses take up 4 bytes of memory. For every message printed onwards,
+    we immediately clean up the stack after the message is printed. We then branch to a label where the user
+    is prompted to enter the number of entries. The subroutine getstr, which was provided captures input from the serial monitor,
+    and puts it into data register d0. For this part, the only
+    valid entries are the numbers 3-15, with anything else entered being rejected.
+    This was accomplished by comparing the input to the number 15. If the number was
+    greater than 15. we branch to a label to warn the user that an invalid entry was entered,
+    and then the program returns to the label which prompts the user to enter
+    the number of entries. Similarly, if the value entered was less than 3, the same thing would occur.
+    If the entry was valid, we put the numentries value that the user entered in the spot reserved on the
+    stack for us. This value was also copied to d7, which is later used as a counter
+    for when the user enters the numbers. As a feature for the user, if the input was
+    accepted, the value is printed to the serial monitor for the user to see. This is done
+    in a similar method to how the messages are printed onto the stack.
+
+    In a very similar fashion, the user is then prompted to enter the divisor number.
+    Here, the accepted values were from 2-5, with the data validation checks happening in
+    almost exactly the same was as outlined above for entering the number of entries.
+    The divisor also went into a spot on the stack, which was reserved for us.
+
+    Next, we enter a loop, where the user is prompted to enter numbers, until
+    the user enters as many numbers as the user declared when prompted to enter the number of entries.
+    The loop itself loops numentries-1 times, since there's a different prompt message for the
+    last number. As mentioned earlier, we use d7 as our counter, since numentries was
+    copied to this data register. The user then goes through the same process of
+    entering numbers, and is prompted to re-enter the number if it is not positive.
+    This is done similarly to above, in that the number entered is compared to the
+    number 1, and if the number entered is less than 1, we branch to a label where
+    the user is warned about the mistake, and then branches back to continue the loop.
+    If the number is accepted, then it is printed to the serial monitor, and then the
+    number entered is moved to the address location pointed to by a2, and a2 is post
+    incremented. On each successful loop iteration, the number 1 is subtracted from
+    the counter d7, until the counter is 1.
+
+    At this point, the user needs to enter one last number, for which there is
+    an appropriate prompt, and the data validation is the exact same as above,
+    with only positive values being accepted. If the number is valid, then it is
+    printed to the serial monitor, and moved to the memory location where a2 points.
+
+    Finally, we reach the part where the backed up registers on the stack are restored,
+    and the subroutine hits the rts command.
 
     % \subsubsection{Part A Sample Calculations of Conversion}
     %
@@ -197,28 +234,8 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     %     0x64 - 0x61 = 0x3\\
     %     0x3 + 0xA = 0xD
 
-
-
   \subsection{Part B}
-    The design for Part B was very similar to Part A. The address register a1 still
-    initially points to 0x2300000, but this time, a2 now points to 0x2320000, which is
-    where the converted data is stored.The same data register d2 was used to temporarily
-    store the input and process the data. Just like in Part A, the \textit{SetZeros.s} and the \textit{DataStorage.s} files
-    were used to initialize memory contents as well.
-
-    Once again, we had a loop branch that initially loads input data from the location
-    pointed to by a1 into data register d2, and the ASCII `Enter' code still terminates
-    the program, as before. In Part B, valid inputs are the ASCII characters A-Z and a-z
-    (0x41-0x5A and 0x61-0x7A).
-    Error handling was also similar to Part A, where the value 0xFFFFFFFF was stored at the
-    memory location pointed to by a2. We had two branches to handle the two ranges of accepted
-    characters.
-
-    For example, if an input character was in the range a-z, a difference was taken
-    relative to the ASCII character `a', and added to the ASCII character `A'. The
-    converted value is then stored at the memory location pointed to by a2, and
-    the addresses stored in a1 and a2 are incremented by 4 before the loop
-    starts over. The flowchart diagram can be found in the Appendix.
+    In Part B
 
     % \begin{figure}
     %   \includegraphics{/path/to/figure}
@@ -329,6 +346,11 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
       check to see if a valid \# was entered? A detailed description is
       sufficient. You do not need to implement this in your code. ''}
       \\ \\
+      ``Hello Students,
+In question no. 3, you are asked to answer the following:
+You have to describe how you are going to check that the entered number is valid or not.
+For example, one entry is say 409 and another is 4h9. Here, 4h9 is a wrong number. Now please explain how are you going to check that?
+Thanks.''
       \noindent\textbf{A:}
         % \lipsum[8]
         Assuming the data range would be fixed and hardcoded into the Assembly code it would be possible to

@@ -22,6 +22,7 @@ WelcomePrompt:
 /* iprintf pops last thing on stack and prints it */
 
 /* allocate 44 bytes because we are using up to 11 registers*/
+/* 11*44 = 44 bytes*/
 suba.l #44, %sp
 
 /* back up register contents  onto the stack*/
