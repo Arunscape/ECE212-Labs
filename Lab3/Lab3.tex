@@ -508,13 +508,15 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
       \textit{Is it always necessary to implement either callee or caller preservation of registers when calling a subroutine. Why?}
       \\ \\
       \noindent\textbf{A:}
-      \lipsum[7]
-
+      Yes, because pretty much all subroutines need to modify registers to get anything meaningfull done,
+      but you don't want to overwrite the data in a register that the previous subroutine might need
     \subsection{Question 2}
       \textit{Is it always necessary to clean up the stack. Why?}
       \\ \\
       \noindent\textbf{A:}
-      \lipsum[8]
+      Not necessarily but it is good practice, and you run the risk of memory leaks
+      or trap errors from attempting to access a restricted memory location, so
+      cleaning up the stack saves a lot of headaches.
 
       \subsection{Question 3} \textit{If a proper check for the getstring
       function was not provided and you have access to the buffer, how would you
@@ -528,7 +530,8 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
 		Thanks.''}
 
       \noindent\textbf{A:}
-        \lipsum[8]
+      hm so we can check the least significant byte, see if it falls within ascii 0-9, bit shift the input by 8 to the right and repeat
+      4 times (one longword=4 bytes)
 
 \section{Conclusion}
   This lab demonstrated how to perform operations
