@@ -530,8 +530,12 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
 		Thanks.''}
 
       \noindent\textbf{A:}
-      hm so we can check the least significant byte, see if it falls within ascii 0-9, bit shift the input by 8 to the right and repeat
-      4 times (one longword=4 bytes)
+      Since we have direct access to the buffer, we can read one byte of the input at a time,
+      and compare it to the ASCII range for the characters `0' - `9', which happens to be
+      the hex values 30-39. This would be done in a similar fashion to how we checked
+      if the number entered was between 3-15 when validating the input for numentries.
+      If any of the bytes is not within the ASCII range `0' - `9', then we
+      know that the whole number entered is not valid 
 
 \section{Conclusion}
   This lab demonstrated how to perform operations
