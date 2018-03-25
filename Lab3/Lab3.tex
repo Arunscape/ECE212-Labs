@@ -370,7 +370,7 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     \begin{figure}[h!]
       \centering
       \includegraphics[width=.8\textwidth]{designc.jpg}
-      \caption{Visualization of the stack for Part A}
+      \caption{Visualization of the stack for Part C}
     \end{figure}
 
     Just like in part B, we begin by backing up the registers $a0-a6$ and $d0-d7$ by
@@ -408,39 +408,65 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     divisible numbers are printed out.
 
     At the end of the subroutine, the string ``End of program'' is printed
-    to let the user know that the program has ended.  
+    to let the user know that the program has ended.
 
 \section{Testing}
   \subsection{Part A}
     Initially, we visually tested our code by using the debugger in Eclipse IDE.
     While stepping through the code, we would check the values at relevant memory
-    locations, and the data and address registers. When the bugs were ironed out,
-    we went on to the next phase of testing.
-    Our code was tested using the provided \textit{Lab1Test.s} file. More specifically,
-    this program was moved into the project folder, downloaded to the ColdFire microcontroller,
-    and the MTTTY serial monitor was loaded to monitor the expected output. Our code was
-    further tested by replacing the `DataStorage.s' file with the other variants provided
-    named: \textit{DataStorage1.s}, \textit{DataStorage2.s}, and \textit{DataStorage3.s}.
-    Finally, our program, which produced the correct output, was verified by a lab TA.
+    locations, and the data and address registers. Extra care had to be taken
+    while monitoring the stack pointer, as it was very easy to miss an off-by-one
+    error, and then have the program crash unexpectedly. On many occasions, the
+    board had to be flashed with its default program when our would not
+    upload. This was done by pressing the blue reset button, then typing \textit{Shift + A}
+    within 2 seconds. Next, \textit{fla} was typed in and then the \textit{F5} key was pressed
+    where we could then send the default program to the microcontroller and
+    re flash our program when trying to debug it. A lab TA showed us a helpful
+    debugging practice, which was to insert a breakpoint at the very beginning
+    of the subroutine, and at the very end. Using this method allowed us to see if our
+    program at least produced the correct output before the trap error occurs.
+    At least for this first part, a brute force approach also helped, where
+    the value we wanted to replace on the stack was increased by 4 and re-uploaded to
+    the microcontroller until the program worked. However, we quickly realized that
+    this method was much less effective when we worked on Part B, which was more complicated
+    and thus required a thorough understanding of how the stack works. When the bugs were ironed out
+    our code was tested using the provided \textit{Lab3.s} file. More specifically,
+    this program was moved into the project folder along with \textit{main.cpp},
+    and the program's functionality was verified. We intentionally
+    entered invalid data such as negative numbers, or numbers outside of the accepted ranges
+    at each step, and actually discovered a small bug, where
+    our program accepted divisors ranging from 3-15 instead of 2-5. Luckily this
+    was a trivial fix, since only two numbers had to be tweaked in the code.
+    When we had a working solution for Part A, we moved on to Part B.
+    % further tested by replacing the `DataStorage.s' file with the other variants provided
+    % named: \textit{DataStorage1.s}, \textit{DataStorage2.s}, and \textit{DataStorage3.s}.
+    % Finally, our program, which produced the correct output, was verified by a lab TA.
 
     \begin{figure}[H]
       \centering
-      \includegraphics[width=0.4\textwidth]{parta.jpg}
+      \includegraphics[width=0.6\textwidth]{parta.jpg}
       \caption{MTTTY output when testing our Part A solution}
     \end{figure}
 
   \subsection{Part B}
-    The procedure for testing our code for part B was very similar to the process
+    The procedure for testing our code for part B was similar to the process
     described above in Part A. We visually inspected our code in the Eclipse IDE,
     used the Eclipse debugger to step through our code, and monitor relevant
-    memory addresses and registers. When we were confident that we had a working
-    solution, we used the provided files \textit{Lab1Test.s}, and the \textit{DataStorage*.s}
-    files to verify our solution by downloading the program to the ColdFire microcontroller,
-    and monitoring the output in MTTTY. Finally, our solution was verified by a lab TA.
+    memory addresses and registers. This part certainly proved to
+    be more involved than Part A, in that a brute force approach to
+    stop the program from crashing would take too long. Deeeper inspection
+    was required when monitoring the memory addresses and stack pointer, as
+    well as a thorough understanding of what was happpening on the stack
+    in order to catch errors. The default program also had to
+    be re-uploaded many more times (compared to Part A) when the microcontroller froze.
+    In the end, however, the program worked, and we verified the output
+    by plugging numbers into our calculators to verify the mean and divisible numbers,
+    and then visually inspecting the min, max, and numdivisible values.
+    When we had a working solution for Part A, we moved on to Part C.
 
     \begin{figure}[H]
       \centering
-      \includegraphics[width=0.4\textwidth]{partb.jpg}
+      \includegraphics[width=0.6\textwidth]{partb.jpg}
       \caption{MTTTY output when testing our Part B solution}
     \end{figure}
 
@@ -455,14 +481,14 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
 
       \begin{figure}[H]
         \centering
-        \includegraphics[width=0.4\textwidth]{partc.jpg}
+        \includegraphics[width=0.6\textwidth]{partc.jpg}
         \caption{MTTTY output when testing our Part B solution}
       \end{figure}
 
       \begin{figure}[H]
         \centering
-        \includegraphics[width=0.4\textwidth]{allparts.jpg}
-        \caption{MTTTY output when testing our Part B solution}
+        \includegraphics[width=0.6\textwidth]{allparts.jpg}
+        \caption{MTTTY output when testing all parts of our solution}
       \end{figure}
 
 \section{Questions}
