@@ -471,20 +471,31 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     \end{figure}
 
     \subsection{Part C}
-      The procedure for testing our code for part C was very similar to the process
-      described above in Part A. We visually inspected our code in the Eclipse IDE,
-      used the Eclipse debugger to step through our code, and monitor relevant
-      memory addresses and registers. When we were confident that we had a working
-      solution, we used the provided files \textit{Lab1Test.s}, and the \textit{DataStorage*.s}
-      files to verify our solution by downloading the program to the ColdFire microcontroller,
-      and monitoring the output in MTTTY. Finally, our solution was verified by a lab TA.
+      The procedure for testing our code for Part C felt more trivial
+      than for Parts A and B, likely as a result from the practice
+      we had debugging those parts. We took care to avoid the
+      mistakes made when writing Parts A and B, such as forgetting
+      to clean up the stack or not understanding where the values
+      are on the stack. This resulted in producing a working solution for
+      Part C in a efficient manner. When testing, we ran into a small bug where
+      the program would enter an infinite loop displaying random numbers, when
+      it was supposed to only display the numbers divisible by the divisor that the
+      user enterered. Using our previous debugging experience from Parts A and
+      B, we quickly discovered that we had mixed up the data registers which hold
+      the numdivisible and the divisor values, and then verified our
+      solution by checking the numbers, and manually calculating the mean ourselves
+      to verify the program's output.     
 
       \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{partc.jpg}
-        \caption{MTTTY output when testing our Part B solution}
+        \caption{MTTTY output when testing our Part C solution}
       \end{figure}
 
+      Finally, our solution was verified by a lab TA. We initially entered values
+      on our own, with invalid data as well to show how our
+      program re-prompts the user to re-enter the data. Then, the TA tried several
+      futher test cases to validate our solution.
       \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{allparts.jpg}
