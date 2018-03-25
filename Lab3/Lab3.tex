@@ -162,11 +162,11 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     \end{figure}
 
     We started by editing \textit{Lab3a.s}, and chose to back up
-    address registers a2-a6 and the data registers d2-d7. Since the stack pointer
-    was a7, this was accomplished by subtracting 44 from the stack pointer,
+    address registers \textit{a2-a6} and the data registers d2-d7. Since the stack pointer
+    was \textit{a7}, this was accomplished by subtracting 44 from the stack pointer,
     then using a movem command to push the values onto the stack. Then at the end. just before
     the rts command in the subroutine, we move the values we backed up to the registers
-    as they were before running the subroutine. Address register a2 was chosen to
+    as they were before running the subroutine. Address register \textit{a2} was chosen to
     hold the memory location of where the valid numbers which were entered would go, which
     was 0x2300000.
     Next, at the very end of the file, we
@@ -175,21 +175,21 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
 
     With the initial setup for this subroutine completed, we moved on to
     actually coding the prompt messages for the program. We begin by
-    pushing the Welcome Prompt onto the stack, and using the provided iprintf
-    and cr subroutines to print the welcome message and a cairrage return for the
+    pushing the Welcome Prompt onto the stack, and using the provided \textit{iprintf}
+    and \textit{cr} subroutines to print the Welcome Message and a cairrage return for the
     user. Once the message was displayed, we immediately clean up the stack by adding 4
     to the stack pointer, since the address of the message was pushed onto the stack,
     and addresses take up 4 bytes of memory. For every message printed onwards,
     we immediately clean up the stack after the message is printed. We then branch to a label where the user
     is prompted to enter the number of entries. The subroutine getstr, which was provided captures input from the serial monitor,
-    and puts it into data register d0. For this part, the only
+    and puts it into data register \textit{d0}. For this part, the only
     valid entries are the numbers 3-15, with anything else entered being rejected.
     This was accomplished by comparing the input to the number 15. If the number was
     greater than 15. we branch to a label to warn the user that an invalid entry was entered,
     and then the program returns to the label which prompts the user to enter
     the number of entries. Similarly, if the value entered was less than 3, the same thing would occur.
     If the entry was valid, we put the numentries value that the user entered in the spot reserved on the
-    stack for us. This value was also copied to d7, which is later used as a counter
+    stack for us. This value was also copied to \textit{d7}, which is later used as a counter
     for when the user enters the numbers. As a feature for the user, if the input was
     accepted, the value is printed to the serial monitor for the user to see. This is done
     in a similar method to how the messages are printed onto the stack.
@@ -202,21 +202,21 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     Next, we enter a loop, where the user is prompted to enter numbers, until
     the user enters as many numbers as the user declared when prompted to enter the number of entries.
     The loop itself loops numentries-1 times, since there's a different prompt message for the
-    last number. As mentioned earlier, we use d7 as our counter, since numentries was
+    last number. As mentioned earlier, we use \textit{d7} as our counter, since numentries was
     copied to this data register. The user then goes through the same process of
     entering numbers, and is prompted to re-enter the number if it is not positive.
     This is done similarly to above, in that the number entered is compared to the
     number 1, and if the number entered is less than 1, we branch to a label where
     the user is warned about the mistake, and then branches back to continue the loop.
     If the number is accepted, then it is printed to the serial monitor, and then the
-    number entered is moved to the address location pointed to by a2, and a2 is post
+    number entered is moved to the address location pointed to by \textit{a2}, and \textit{a2} is post
     incremented. On each successful loop iteration, the number 1 is subtracted from
-    the counter d7, until the counter is 1.
+    the counter \textit{d7}, until the counter is 1.
 
     At this point, the user needs to enter one last number, for which there is
     an appropriate prompt, and the data validation is the exact same as above,
     with only positive values being accepted. If the number is valid, then it is
-    printed to the serial monitor, and moved to the memory location where a2 points.
+    printed to the serial monitor, and moved to the memory location where \textit{a2} points.
 
     Finally, we reach the part where the backed up registers on the stack are restored,
     and the subroutine hits the rts command.
@@ -235,13 +235,103 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     %     0x3 + 0xA = 0xD
 
   \subsection{Part B}
-    In Part B
+    In Part B, another subroutine is written, which computes some stats
+    on the numbers entered. Similar to Part A, some code was provided
+    such that the stack entry and exit conditions are as follows:
 
-    % \begin{figure}
-    %   \includegraphics{/path/to/figure}
-    %   \caption{}
-    %   \label{}
-    % \end{figure}
+    \begin{itemize}
+      \item Stack Entry Condition =
+        \begin{enumerate}
+          \item Space allocated for how many numbers are divisible by the divisor (long word)
+          \item Number of entries (long word) on stack
+          \item Divisor number (long word) on stack
+        \end{enumerate}
+      \item Stack Exit Condtion =
+        \begin{enumerate}
+          \item How many numbers are divisible by the divisor (long word) on stack
+          \item Number of entries on stack (long word)
+          \item Divisor number on stack (long word)
+        \end{enumerate}
+    \end{itemize}
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=.8\textwidth]{designb.jpg}
+      \caption{Visualization of the stack for Part B}
+    \end{figure}
+
+    We begin by backing up the registers $a0-a6$ and $d0-d7$ by
+    subtracting 60 from the stack pointer, and then using the \textit{movem}
+    command to push those values onto the stack. Similarly, at the end of the
+    subroutine just before rts, we restore the values by using \textit{movem} to restore the values,
+    then add 60 to the stack pointer before returning to the previous subroutine.
+
+    We begin by reading the numentries and divisor off of the stack, which
+    were put there by the subroutine in Part A. The addresses 0x2300000
+    and 0x2310000 were loaded into address registers \textit{a2} and \textit{a3} respectively.
+    \textit{a2} kept track of the location were the numbers were entered, and \textit{a3}
+    kept track of where the min, mean, max, and divisible numbers would be output.
+
+    To begin calculating the minimum number, we copy the numentries to another
+    data register to use as a counter. The first number is read by indirectly addressing
+    \textit{a2} with a post increment, and moved to a data register which will hold the
+    final minimum value. Inside a loop, which loops numentries-1
+    times, (since the first number was already read), the next number is read by indirectly
+    addressing \textit{a2} with a post increment, and
+    moved into a temporary data register, where it is then compared to the data register
+    which is supposed to hold the minimum value. If the temporary value is less than the
+    minimum value, we move the temporary value to the data register which holds the minumum value.
+    If the temporary value is greater than the current minimum, then the loop continues.
+    At the end of every loop iteration, the loop counter is decremented by 1, and compared
+    to the number 1, since it loops numentries-1 times. Once this loop is complete,
+    the minumum value is stored in data register \textit{d5}, so we move it to
+    the memory location pointed at by \textit{a3} and post increment it.
+
+    The maximum number is calculated in a very similar manner compared to how
+    the min was calculated. First, \textit{a2} is reset to 0x2300000, and the loop counter
+    is reset to numentries, since we post
+    incremented \textit{a2} when finding the min, and we decremented the counter
+    when going through the numbers again to find the min.
+    Then, we go through a loop that is almost the same as for calculating the minumum number.
+    except that the current maximum number is held in one data register,
+    and a temporary value is read and compared to the maximum number. If the temporary
+    number is greater than the current maximum, then the temporary number becomes the
+    maximum, and by the end of the loop, the maximum value is stored in data register \textit{d6},
+    so we move it to
+    the memory location pointed at by \textit{a3} and post increment it.
+
+    To find the mean, address register \textit{a2} was reset to 0x2300000,
+    and the loop counter was reset to numentries again. A data register was used
+    to store the cumulative sum of the numbers, which was accomplished by
+    first clearing the data register, then looping over the list of
+    numbers entered (pointed at by \textit{a2}), and adding each number
+    to the sum. This was done by indirectly addressing \textit{a2} with
+    a post increment to copy the value to a data register, then adding
+    that value to our cumulative sum. At the end of the loop, we have the
+    cumulative sum, so to
+    find the mean, we simply divide the cumulative sum by the numentries
+    by using \textit{divs.l}. When the division was complete, the
+    mean was stored in data register \textit{d4}, so so we move it to
+    the memory location pointed at by \textit{a3} and post increment it.
+
+    Finally, to find the divisible numbers, we once more reset \textit{a2}
+    to 0x2300000, and the loop counter to numentries. We go through one last loop,
+    where a number is read by indirectly addressing \textit{a2}, moving it to
+    a data register, and then using \textit{divs.w} to divide the number by the
+    divisor, since \textit{divs.w} provides the remainder stored in the
+    16 most significant bits. If the number is divisible, it
+    should not have a remainder, so we check the remainder by
+    bit shifting the division result 16 bits to the right, and check if
+    the remainder is 0. If so, a counter which holds the number of
+    divisible numbers is incremented by 1, and the divisible number
+    is moved to the location pointed at by \textit{a3} and post incremented.
+    The loop then continues until all the numbers have been processed. At the
+    end of the loop, the number of divisible entries is stored in data register \textit{d7},
+    so we move it to the spot reserved on the stack for us.
+
+    We then reach the end of the subroutine, where we restore the backed up register values
+    on the stack, add 60 to the stack pointer, and return to the previous subroutine.
+
 
     % \subsubsection{Part B Sample Calculations of Conversion}
     %
@@ -254,7 +344,11 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     % 0x44 = 'D'
 
     \subsection{Part C}
-
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=.8\textwidth]{designc.jpg}
+      \caption{Visualization of the stack for Part A}
+    \end{figure}
 \section{Testing}
   \subsection{Part A}
     Initially, we visually tested our code by using the debugger in Eclipse IDE.

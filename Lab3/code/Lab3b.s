@@ -10,10 +10,10 @@
 /******************************************************************/
 /* General Information ********************************************/
 /* File Name: Lab3b.s **************************************/
-/* Names of Students: _________________ and ____________________ **/
-/* Date: _________________                                       **/
+/* Names of Students: Arun Woosaree and Navras Kamal **/
+/* Date: March 5, 2018                                           **/
 /* General Description:                                          **/
-/*                                                               **/
+/* Computes stats on the numbers entered (min mean max)          **/
 /******************************************************************/
 Stats:
 /*Write your program here******************************************/
@@ -152,7 +152,7 @@ move.l %d7, 72(%sp)
 movem.l (%sp), %a0-%a6/%d0-%d7
 adda.l #60 , %sp
 rts
-/*End of Subroutine **************************************************/ 
+/*End of Subroutine **************************************************/
 .data
 /*All Strings placed here **************************************************/
 

@@ -68,6 +68,8 @@ blt failnumentries
 
 /*success, replace value on stack*/
 move.l %d0, 52(%sp)
+
+/*counter used for loop*/
 move.l %d0, %d7
 
 /*print what user entered*/
