@@ -400,6 +400,16 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
     with the subroutine \textit{value}. Whenever something is printed, the stack is
     immediately cleaned up afterwards by adding 4 to the stack pointer whenever a value is printed.
 
+    Finally, in a manner similar to how the numbers were printed, the
+    divisible numbers are printed by indirectly addressing \textit{a3} with post
+    increment, putting the number on the stack, and jumping to the subroutine
+    \textit{value} to print the numbers. This happens in a loop, with numdivisible
+    being decremented at the end of each loop iteration, until all the
+    divisible numbers are printed out.
+
+    At the end of the subroutine, the string ``End of program'' is printed
+    to let the user know that the program has ended.  
+
 \section{Testing}
   \subsection{Part A}
     Initially, we visually tested our code by using the debugger in Eclipse IDE.
