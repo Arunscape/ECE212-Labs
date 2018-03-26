@@ -89,13 +89,13 @@
 \newpage
 
 \section{Introduction}
-This lab deals with stack operation (push and pop), segmenting a long program/function into several smaller and simpler subroutines/sub-functions. Each part uses these subroutines in order to produce the final output of the program which is statistical information about the input values, including the mean, max, min and number of entries divisible by another specified value.  The subroutines must be run in order, however each is designed to be transparent and to flow seamlessly together.  In addition this lab introduces the use of strings for user prompts, allowing the user to get feedback from the program as well as information about what they should enter at each step.  These two combined are major aspects of programming in assembly.  Subroutines allow a longer task to be subdivided into smaller pieces that can be called multiple times if required, and text prompts help not only with the execution of the program by the users, but also with the debugging by the developers.  
+This lab deals with stack operation (push and pop), segmenting a long program/function into several smaller and simpler subroutines/sub-functions. Each part uses these subroutines in order to produce the final output of the program which is statistical information about the input values, including the mean, max, min and number of entries divisible by another specified value.  The subroutines must be run in order, however each is designed to be transparent and to flow seamlessly together.  In addition this lab introduces the use of strings for user prompts, allowing the user to get feedback from the program as well as information about what they should enter at each step.  These two combined are major aspects of programming in assembly.  Subroutines allow a longer task to be subdivided into smaller pieces that can be called multiple times if required, and text prompts help not only with the execution of the program by the users, but also with the debugging by the developers.
 
 
   \subsection{Part A}
-  In part A, the subroutine was made to take in the user values. The subroutine is transparent thus it stores the values in the registers before it executes.  The first value must be a positive integer in the range of 3-15, and this represents the number of entries to be taken in a future step. The second value is divisor which must be an integer between 2 and 5. Finally N positive integers are taken in, where N is the integer from the first part of this step.  At the end of this phase the registers are restored and the stack is reset.  
+  In part A, the subroutine was made to take in the user values. The subroutine is transparent thus it stores the values in the registers before it executes.  The first value must be a positive integer in the range of 3-15, and this represents the number of entries to be taken in a future step. The second value is divisor which must be an integer between 2 and 5. Finally N positive integers are taken in, where N is the integer from the first part of this step.  At the end of this phase the registers are restored and the stack is reset.
   \subsection{Part B}
-  In part B the statistical values are calculated from the values taken in from part A.  The maximum value and minimum value of the array of numbers, as well as the mean value, and finally the number of values divisible by the divisor, as well as what those values were.  These outputs are stored in the stack to be referenced later.  As before this is a transparent subroutine thus the values in the registers are preserved and restored after the execution of this subroutine.  
+  In part B the statistical values are calculated from the values taken in from part A.  The maximum value and minimum value of the array of numbers, as well as the mean value, and finally the number of values divisible by the divisor, as well as what those values were.  These outputs are stored in the stack to be referenced later.  As before this is a transparent subroutine thus the values in the registers are preserved and restored after the execution of this subroutine.
   \subsection{Part C}
   The final subroutine is also transparent as above, and the registers are stored and restored.  This subroutine is used to output all the values from part B in an easy to read format with labels and information for the user.  Overall these three segments demonstrate how to handle these subroutines and how to make sure they all work together as expected.
 
@@ -475,9 +475,8 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
       modify registers that the caller may have been using, which will likely result
       in unexpected behavior in the caller or callee programs. However, not all registers
       need to be backed up. The only registers which need to be backed up and restored are the
-      ones that the subroutine modifies.  
-
-      but you don't want to overwrite the data in a register that the previous subroutine might need
+      ones that the subroutine modifies.
+      i.e. you don't want to overwrite the data in a register that the previous subroutine might need
     \subsection{Question 2}
       \textit{Is it always necessary to clean up the stack. Why?}
       \\ \\
@@ -519,7 +518,12 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
       Therefore, the entry 409 would be valid, and 4h9 would be invalid.
 
 \section{Conclusion}
+<<<<<<< HEAD
   This lab demonstrated how to create and use subroutines to create effective, modular code efficiently inside the Coldfire Assembly.  In addition we got a better understanding of how to create custom prompts to improve user experience and improve efficiency of debugging.  For the first part of this lab we had encountered some hardware issues and issues with the IDE which were somewhat time consuming to resolve, however once we figured out the issue and resolved the problems with the IDE our workflow increased drastically.  Another issue we faced was with our own code, as with two people working on it asynchronously we faced some issues when comments were not clear and some code was incorrect due to improper labelling of variable values.  This was resolved with better version control and the application of pair programming techniques.  Overall the lab was successful at it's goals of improving our understanding of the mechanics of transparent subroutines that must work in sequence to perform a specific task.  
+=======
+  \textbf{FILLITIN}
+  This lab demonstrated how to create and use subroutines to create effective, modular code efficiently inside the Coldfire Assembly.  In addition we got a better understanding of how to create custom prompts to improve user experience and improve efficiency of debugging.  For the first part of this lab we had encountered some hardware issues and issues with the IDE which were somewhat time consuming to resolve, however once we figured out the issue and resolved the problems with the IDE our workflow increased drastically.  Another issue we faced was with our own code, as with two people working on it asynchronously we faced some issues when comments were not clear and some code was incorrect due to improper labelling of variable values.  This was resolved with better version control and the application of pair programming techniques.  Overall the lab was successful at it's goals of improving our understanding of the mechanics of transparent subroutines that must work in sequence to perform a specific task.
+>>>>>>> 0f0355601a2d9a207c65239ccc09ac7bfc4aeab4
 
 \newpage
 \section{Appendix}
