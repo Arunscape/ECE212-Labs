@@ -508,26 +508,36 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
       \textit{Is it always necessary to implement either callee or caller preservation of registers when calling a subroutine. Why?}
       \\ \\
       \noindent\textbf{A:}
-      Yes, because pretty much all subroutines need to modify registers to get anything meaningfull done,
+      Yes, because pretty much all subroutines need to modify registers to get anything meaningful done,
+      whether the subroutine needs to store a temporary value, do some addition, or
+      keep track of a memory location. Without the preservation of registers, the subroutine will
+      modify registers that the caller may have been using, which will likely result
+      in unexpected behavior in the caller or callee programs. However, not all registers
+      need to be backed up. The only registers which need to be backed up and restored are the
+      ones that the subroutine modifies.  
+
       but you don't want to overwrite the data in a register that the previous subroutine might need
     \subsection{Question 2}
       \textit{Is it always necessary to clean up the stack. Why?}
       \\ \\
       \noindent\textbf{A:}
       Not necessarily but it is good practice, and you run the risk of memory leaks
-      or trap errors from attempting to access a restricted memory location, so
-      cleaning up the stack saves a lot of headaches.
+      or trap errors from attempting to access a restricted memory location.
+      Cleaning up the stack saves a lot of headaches, and it makes it easier to keep
+      track of the values that your program uses. It also prevents
+      your program from behaving unexpectedly.
 
       \subsection{Question 3} \textit{If a proper check for the getstring
       function was not provided and you have access to the buffer, how would you
       check to see if a valid \# was entered? A detailed description is
       sufficient. You do not need to implement this in your code.
-      \\ \\
-      ``Hello Students,
-		In question no. 3, you are asked to answer the following:
-		You have to describe how you are going to check that the entered number is valid or not.
-		For example, one entry is say 409 and another is 4h9. Here, 4h9 is a wrong number. Now please explain how are you going to check that?
-		Thanks.''}
+    %   \\ \\
+    %   ``Hello Students,
+		% In question no. 3, you are asked to answer the following:
+		% You have to describe how you are going to check that the entered number is valid or not.
+		% For example, one entry is say 409 and another is 4h9. Here, 4h9 is a wrong number. Now please explain how are you going to check that?
+		% Thanks.''
+    }
 
       \noindent\textbf{A:}
       Since we have direct access to the buffer, we can read one byte of the input at a time,
@@ -535,7 +545,17 @@ This lab deals with stack operation (push and pop), segmenting a long program/fu
       the hex values 30-39. This would be done in a similar fashion to how we checked
       if the number entered was between 3-15 when validating the input for numentries.
       If any of the bytes is not within the ASCII range `0' - `9', then we
-      know that the whole number entered is not valid 
+      know that the whole number entered is not valid. i.e. if the byte entered
+      is greater than 39 or less than 30, the character is invalid, which makes the whole
+      entry invalid. \\
+      Example:
+      \begin{itemize}
+        \item ASCII(9) = 0x39 -valid
+        \item ASCII(h) = 0x68 -invalid
+        \item ASCII(0) = 0x30 -valid
+        \item ASCII(4) = 0x34 -valid
+      \end{itemize}
+      Therefore, the entry 409 would be valid, and 4h9 would be invalid.
 
 \section{Conclusion}
   This lab demonstrated how to perform operations
